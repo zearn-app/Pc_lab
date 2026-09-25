@@ -21,7 +21,7 @@
 
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -52,7 +52,7 @@
         }
 
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 35px;
         }
 
         input[type="text"] {
@@ -76,11 +76,29 @@
             color: #666;
         }
 
+        .exercise-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .exercise-section:last-child {
+            border-bottom: none;
+        }
+
+        .exercise-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
         .button-group {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         button {
@@ -115,6 +133,7 @@
             color: #00d4ff;
             border: 2px solid #00d4ff;
             box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+            margin-top: 20px;
         }
 
         .codestore-btn:hover {
@@ -124,7 +143,7 @@
         }
 
         .message {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-size: 14px;
             padding: 12px 16px;
             border-radius: 8px;
@@ -157,10 +176,10 @@
         }
 
         .preview-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
-            color: #00ff88;
-            margin-bottom: 20px;
+            color: #00d4ff;
+            margin-bottom: 15px;
             text-align: center;
         }
 
@@ -168,9 +187,8 @@
             background: #0f0f1e;
             border: 1px solid #00d4ff;
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            max-height: 300px;
+            padding: 15px;
+            max-height: 200px;
             overflow-y: auto;
         }
 
@@ -179,11 +197,11 @@
             padding: 0;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
 
         .file-list li {
-            padding: 8px;
+            padding: 6px;
             background: #16213e;
             border: 1px solid #00d4ff;
             border-radius: 4px;
@@ -191,33 +209,6 @@
             font-family: 'Courier New', monospace;
             font-size: 12px;
             text-align: center;
-        }
-
-        .programs-preview {
-            margin-top: 20px;
-        }
-
-        .program-item {
-            background: #0f0f1e;
-            border: 1px solid #00d4ff;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 10px;
-            font-size: 13px;
-        }
-
-        .program-number {
-            font-size: 11px;
-            color: #00d4ff;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 3px;
-        }
-
-        .program-title {
-            font-size: 14px;
-            color: #00ff88;
-            font-weight: bold;
         }
 
         @media (max-width: 480px) {
@@ -238,13 +229,12 @@
                 font-size: 14px;
             }
 
-            .file-list {
-                grid-template-columns: 1fr;
+            .exercise-title {
+                font-size: 18px;
             }
 
-            .program-item {
-                padding: 10px;
-                font-size: 12px;
+            .file-list {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -253,7 +243,7 @@
     <div class="container">
         <div class="card">
             <div class="title">C File Generator</div>
-            <div class="subtitle">Enter your name and generate 14 C programs.</div>
+            <div class="subtitle">Enter your name and generate C programs by exercise.</div>
             
             <div class="input-group">
                 <input 
@@ -265,24 +255,43 @@
                 >
             </div>
 
-            <div class="button-group">
-                <button class="generate-btn" onclick="generateCFiles()">Generate C Files</button>
-                <button class="codestore-btn" onclick="goToCodeStore()">Code Store</button>
-            </div>
-
-            <div class="message" id="message"></div>
-
-            <div class="preview-section" id="previewSection">
-                <div class="preview-title">Generated Files</div>
-                <div class="preview-files">
-                    <ul class="file-list" id="fileList"></ul>
+            <!-- Exercise 1 -->
+            <div class="exercise-section">
+                <div class="exercise-title">Exercise 1: Control Flow Statements</div>
+                <div class="button-group">
+                    <button class="generate-btn" onclick="generateExercise1()">Generate Exercise 1 (7 Files)</button>
+                </div>
+                <div class="message" id="message1"></div>
+                <div class="preview-section" id="previewSection1">
+                    <div class="preview-title">Exercise 1 Files</div>
+                    <div class="preview-files">
+                        <ul class="file-list" id="fileList1"></ul>
+                    </div>
                 </div>
             </div>
+
+            <!-- Exercise 2 -->
+            <div class="exercise-section">
+                <div class="exercise-title">Exercise 2: Operators</div>
+                <div class="button-group">
+                    <button class="generate-btn" onclick="generateExercise2()">Generate Exercise 2 (7 Files)</button>
+                </div>
+                <div class="message" id="message2"></div>
+                <div class="preview-section" id="previewSection2">
+                    <div class="preview-title">Exercise 2 Files</div>
+                    <div class="preview-files">
+                        <ul class="file-list" id="fileList2"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="codestore-btn" onclick="goToCodeStore()">View Code Store</button>
         </div>
     </div>
 
     <script>
-        const cPrograms = {
+        // Exercise 1: Control Flow Statements (7 programs)
+        const exercise1Programs = {
             program1: `#include <stdio.h>
 
 int main() {
@@ -379,8 +388,12 @@ int main() {
         printf("%d ", i);
     }
     return 0;
-}`,
-            program8: `#include <stdio.h>
+}`
+        };
+
+        // Exercise 2: Operators (7 programs)
+        const exercise2Programs = {
+            program1: `#include <stdio.h>
 
 int main() {
     int a, b;
@@ -390,7 +403,7 @@ int main() {
     printf("Second number = %d", b);
     return 0;
 }`,
-            program9: `#include <stdio.h>
+            program2: `#include <stdio.h>
 
 int main() {
     int a, b;
@@ -403,7 +416,7 @@ int main() {
     printf("Remainder = %d", a % b);
     return 0;
 }`,
-            program10: `#include <stdio.h>
+            program3: `#include <stdio.h>
 
 int main() {
     int a, b;
@@ -417,7 +430,7 @@ int main() {
     printf("a <= b = %d", a <= b);
     return 0;
 }`,
-            program11: `#include <stdio.h>
+            program4: `#include <stdio.h>
 
 int main() {
     int a, b;
@@ -428,7 +441,7 @@ int main() {
     printf("!(a > 0) = %d", !(a > 0));
     return 0;
 }`,
-            program12: `#include <stdio.h>
+            program5: `#include <stdio.h>
 
 int main() {
     int a;
@@ -440,7 +453,7 @@ int main() {
     printf("After decrement = %d", a);
     return 0;
 }`,
-            program13: `#include <stdio.h>
+            program6: `#include <stdio.h>
 
 int main() {
     int a, b, c, result;
@@ -450,7 +463,7 @@ int main() {
     printf("Result = %d", result);
     return 0;
 }`,
-            program14: `#include <stdio.h>
+            program7: `#include <stdio.h>
 
 int main() {
     int a, b, largest;
@@ -462,14 +475,17 @@ int main() {
 }`
         };
 
-        const programTitles = [
+        const exercise1Titles = [
             "if Statement",
             "if-else Statement",
             "Nested if Statement",
             "goto Statement",
             "switch-case Statement",
             "break Statement",
-            "continue Statement",
+            "continue Statement"
+        ];
+
+        const exercise2Titles = [
             "Input and Output",
             "Arithmetic Operators",
             "Relational Operators",
@@ -485,8 +501,8 @@ int main() {
             return name;
         }
 
-        function showMessage(text, type) {
-            const msgElement = document.getElementById('message');
+        function showMessage(msgId, text, type) {
+            const msgElement = document.getElementById(msgId);
             msgElement.textContent = text;
             msgElement.className = `message ${type}`;
             
@@ -500,27 +516,39 @@ int main() {
         function updatePreview() {
             const nameInput = document.getElementById('nameInput');
             const name = nameInput.value.trim();
-            const previewSection = document.getElementById('previewSection');
 
             if (!name) {
-                previewSection.classList.remove('active');
+                document.getElementById('previewSection1').classList.remove('active');
+                document.getElementById('previewSection2').classList.remove('active');
                 return;
             }
 
             const sanitized = sanitizeFilename(name);
             if (!sanitized) {
-                previewSection.classList.remove('active');
+                document.getElementById('previewSection1').classList.remove('active');
+                document.getElementById('previewSection2').classList.remove('active');
                 return;
             }
 
-            const fileList = document.getElementById('fileList');
-            let html = '';
-            for (let i = 1; i <= 14; i++) {
+            // Update Exercise 1 preview
+            const fileList1 = document.getElementById('fileList1');
+            let html1 = '';
+            for (let i = 1; i <= 7; i++) {
                 const num = String(i).padStart(2, '0');
-                html += `<li>${sanitized}${num}.c</li>`;
+                html1 += `<li>${sanitized}${num}.c</li>`;
             }
-            fileList.innerHTML = html;
-            previewSection.classList.add('active');
+            fileList1.innerHTML = html1;
+            document.getElementById('previewSection1').classList.add('active');
+
+            // Update Exercise 2 preview
+            const fileList2 = document.getElementById('fileList2');
+            let html2 = '';
+            for (let i = 1; i <= 7; i++) {
+                const num = String(i).padStart(2, '0');
+                html2 += `<li>${sanitized}${num}.c</li>`;
+            }
+            fileList2.innerHTML = html2;
+            document.getElementById('previewSection2').classList.add('active');
         }
 
         function downloadFile(content, filename) {
@@ -541,34 +569,64 @@ int main() {
             });
         }
 
-        async function generateCFiles() {
+        async function generateExercise1() {
             const nameInput = document.getElementById('nameInput');
             const name = nameInput.value;
 
             if (!name.trim()) {
-                showMessage('Please enter your name.', 'error');
+                showMessage('message1', 'Please enter your name.', 'error');
                 return;
             }
 
             const sanitized = sanitizeFilename(name);
             if (!sanitized) {
-                showMessage('Please enter a valid name.', 'error');
+                showMessage('message1', 'Please enter a valid name.', 'error');
                 return;
             }
 
-            // Download all 14 files in sequence
-            for (let i = 1; i <= 14; i++) {
+            // Download all 7 files for Exercise 1
+            for (let i = 1; i <= 7; i++) {
                 const num = String(i).padStart(2, '0');
                 const key = `program${i}`;
-                await downloadFile(cPrograms[key], `${sanitized}${num}.c`);
+                await downloadFile(exercise1Programs[key], `${sanitized}${num}.c`);
             }
 
-            let message = '14 C files generated successfully!\n\n';
-            for (let i = 1; i <= 14; i++) {
+            let message = 'Exercise 1: 7 C files generated successfully!\n\n';
+            for (let i = 1; i <= 7; i++) {
                 const num = String(i).padStart(2, '0');
                 message += `${sanitized}${num}.c\n`;
             }
-            showMessage(message, 'success');
+            showMessage('message1', message, 'success');
+        }
+
+        async function generateExercise2() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value;
+
+            if (!name.trim()) {
+                showMessage('message2', 'Please enter your name.', 'error');
+                return;
+            }
+
+            const sanitized = sanitizeFilename(name);
+            if (!sanitized) {
+                showMessage('message2', 'Please enter a valid name.', 'error');
+                return;
+            }
+
+            // Download all 7 files for Exercise 2
+            for (let i = 1; i <= 7; i++) {
+                const num = String(i).padStart(2, '0');
+                const key = `program${i}`;
+                await downloadFile(exercise2Programs[key], `${sanitized}${num}.c`);
+            }
+
+            let message = 'Exercise 2: 7 C files generated successfully!\n\n';
+            for (let i = 1; i <= 7; i++) {
+                const num = String(i).padStart(2, '0');
+                message += `${sanitized}${num}.c\n`;
+            }
+            showMessage('message2', message, 'success');
         }
 
         function goToCodeStore() {
@@ -577,7 +635,7 @@ int main() {
 
         document.getElementById('nameInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                generateCFiles();
+                generateExercise1();
             }
         });
 
