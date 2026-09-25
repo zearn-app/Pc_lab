@@ -21,7 +21,7 @@
 
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -66,54 +66,56 @@
             background: #16213e;
             border: 2px solid #00d4ff;
             border-radius: 12px;
-            padding: 30px;
+            padding: 25px;
             box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .code-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             color: #00ff88;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .code-description {
-            font-size: 16px;
+            font-size: 14px;
             color: #b0b0b0;
-            margin-bottom: 25px;
-            line-height: 1.6;
+            margin-bottom: 15px;
+            line-height: 1.5;
         }
 
         .code-block {
             background: #0f0f1e;
             border: 1px solid #00d4ff;
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
+            padding: 15px;
+            margin-bottom: 15px;
             overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .code-block code {
             font-family: 'Courier New', monospace;
-            font-size: 14px;
+            font-size: 12px;
             color: #00ff88;
-            line-height: 1.6;
+            line-height: 1.5;
             white-space: pre;
             display: block;
         }
 
         .view-btn {
             width: 100%;
-            padding: 14px 24px;
-            font-size: 16px;
+            padding: 12px 20px;
+            font-size: 14px;
             font-weight: 600;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             background: linear-gradient(135deg, #00d4ff, #00ff88);
             color: #000;
             box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
@@ -141,20 +143,25 @@
             }
 
             .card {
-                padding: 20px;
+                padding: 18px;
+                margin-bottom: 15px;
             }
 
             .code-title {
-                font-size: 20px;
+                font-size: 16px;
+            }
+
+            .code-description {
+                font-size: 13px;
             }
 
             .code-block code {
-                font-size: 12px;
+                font-size: 11px;
             }
 
             .view-btn {
-                padding: 12px 20px;
-                font-size: 14px;
+                padding: 10px 16px;
+                font-size: 12px;
             }
         }
     </style>
@@ -166,13 +173,170 @@
             <div class="title">C Code Store</div>
         </div>
 
-        <!-- Program 1 Card -->
+        <!-- Program 1 -->
         <div class="card">
-            <div class="code-title">Program 1 — Two Number Input</div>
-            <div class="code-description">
-                Reads two integers and displays them separately.
-            </div>
+            <div class="code-title">1. if Statement</div>
+            <div class="code-description">Check whether a number is positive using a simple if statement.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
 
+int main() {
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    if (n > 0)
+        printf("The number is positive.");
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 2 -->
+        <div class="card">
+            <div class="code-title">2. if-else Statement</div>
+            <div class="code-description">Check whether a number is even or odd using if-else.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    if (n % 2 == 0)
+        printf("Even number");
+    else
+        printf("Odd number");
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 3 -->
+        <div class="card">
+            <div class="code-title">3. Nested if Statement</div>
+            <div class="code-description">Find the largest of three numbers using nested if statements.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b, c, largest;
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &a, &b, &c);
+    if (a > b) {
+        if (a > c)
+            largest = a;
+        else
+            largest = c;
+    } else {
+        if (b > c)
+            largest = b;
+        else
+            largest = c;
+    }
+    printf("Largest = %d", largest);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 4 -->
+        <div class="card">
+            <div class="code-title">4. goto Statement</div>
+            <div class="code-description">Demonstrate goto to repeat an input until a positive number is entered.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int n;
+input:
+    printf("Enter a positive number: ");
+    scanf("%d", &n);
+    if (n <= 0)
+        goto input;
+    printf("You entered %d", n);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 5 -->
+        <div class="card">
+            <div class="code-title">5. switch-case Statement</div>
+            <div class="code-description">Display the day name based on a number using switch-case.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int day;
+    printf("Enter a number (1-3): ");
+    scanf("%d", &day);
+    switch (day) {
+        case 1:
+            printf("Monday");
+            break;
+        case 2:
+            printf("Tuesday");
+            break;
+        case 3:
+            printf("Wednesday");
+            break;
+        default:
+            printf("Invalid choice");
+    }
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 6 -->
+        <div class="card">
+            <div class="code-title">6. break Statement</div>
+            <div class="code-description">Stop a loop when the value reaches 5.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int i;
+    for (i = 1; i <= 10; i++) {
+        if (i == 5)
+            break;
+        printf("%d ", i);
+    }
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 7 -->
+        <div class="card">
+            <div class="code-title">7. continue Statement</div>
+            <div class="code-description">Skip the number 5 while printing numbers from 1 to 10.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int i;
+    for (i = 1; i <= 10; i++) {
+        if (i == 5)
+            continue;
+        printf("%d ", i);
+    }
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 8 -->
+        <div class="card">
+            <div class="code-title">8. Input and Output Statements</div>
+            <div class="code-description">Read two numbers from the user and display their values.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
 
@@ -185,17 +349,13 @@ int main() {
     return 0;
 }</code>
             </div>
-
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 2 Card -->
+        <!-- Program 9 -->
         <div class="card">
-            <div class="code-title">Program 2 — Arithmetic Operations</div>
-            <div class="code-description">
-                Performs addition, subtraction, multiplication, division and remainder operations on two integers.
-            </div>
-
+            <div class="code-title">9. Arithmetic Operators</div>
+            <div class="code-description">Perform addition, subtraction, multiplication, division and remainder operations.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
 
@@ -203,25 +363,21 @@ int main() {
     int a, b;
     printf("Enter two numbers: ");
     scanf("%d %d", &a, &b);
-    printf("Addition %d\n", a + b);
-    printf("Subtraction %d\n", a - b);
-    printf("Multiplication %d\n", a * b);
-    printf("Division %d\n", a / b);
-    printf("Remainder %d", a % b);
+    printf("Addition = %d\n", a + b);
+    printf("Subtraction = %d\n", a - b);
+    printf("Multiplication = %d\n", a * b);
+    printf("Division = %d\n", a / b);
+    printf("Remainder = %d", a % b);
     return 0;
 }</code>
             </div>
-
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 3 Card -->
+        <!-- Program 10 -->
         <div class="card">
-            <div class="code-title">Program 3 — Relational Operators</div>
-            <div class="code-description">
-                Demonstrates relational operators using two integers.
-            </div>
-
+            <div class="code-title">10. Relational Operators</div>
+            <div class="code-description">Compare two numbers using relational operators.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
 
@@ -238,7 +394,85 @@ int main() {
     return 0;
 }</code>
             </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
 
+        <!-- Program 11 -->
+        <div class="card">
+            <div class="code-title">11. Logical Operators</div>
+            <div class="code-description">Demonstrate AND (&&), OR (||) and NOT (!) operators.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("(a > 0 && b > 0) = %d\n", (a > 0 && b > 0));
+    printf("(a > 0 || b > 0) = %d\n", (a > 0 || b > 0));
+    printf("!(a > 0) = %d", !(a > 0));
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 12 -->
+        <div class="card">
+            <div class="code-title">12. Assignment & Increment Operators</div>
+            <div class="code-description">Demonstrate assignment (=), increment (++) and decrement (--) operators.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a;
+    a = 10;
+    printf("Initial value = %d\n", a);
+    a++;
+    printf("After increment = %d\n", a);
+    a--;
+    printf("After decrement = %d", a);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 13 -->
+        <div class="card">
+            <div class="code-title">13. Expression Evaluation</div>
+            <div class="code-description">Evaluate an arithmetic expression using operator precedence.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b, c, result;
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &a, &b, &c);
+    result = a + b * c;
+    printf("Result = %d", result);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 14 -->
+        <div class="card">
+            <div class="code-title">14. Conditional (Ternary) Operator</div>
+            <div class="code-description">Find the larger of two numbers using the conditional operator.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b, largest;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    largest = (a > b) ? a : b;
+    printf("Largest = %d", largest);
+    return 0;
+}</code>
+            </div>
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
     </div>
