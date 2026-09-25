@@ -33,15 +33,13 @@
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 30px;
-            text-align: center;
             box-shadow: 0 8px 32px rgba(228, 64, 95, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 20px;
         }
 
         .instagram-header:hover {
@@ -54,16 +52,22 @@
         }
 
         .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
+            flex-shrink: 0;
         }
 
         .logo-img {
-            height: 50px;
-            width: auto;
-            filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: brightness(1.05);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .instagram-text-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
         .instagram-text {
@@ -267,6 +271,29 @@
         }
 
         @media (max-width: 480px) {
+            .instagram-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+
+            .instagram-text-container {
+                text-align: center;
+            }
+
+            .logo-img {
+                height: 60px;
+                width: 60px;
+            }
+
+            .instagram-text {
+                font-size: 14px;
+            }
+
+            .instagram-subtitle {
+                font-size: 12px;
+            }
+
             .card {
                 padding: 30px 20px;
             }
@@ -291,23 +318,6 @@
             .file-list {
                 grid-template-columns: 1fr;
             }
-
-            .instagram-header {
-                padding: 15px;
-                margin-bottom: 25px;
-            }
-
-            .logo-img {
-                height: 40px;
-            }
-
-            .instagram-text {
-                font-size: 14px;
-            }
-
-            .instagram-subtitle {
-                font-size: 12px;
-            }
         }
     </style>
 </head>
@@ -317,8 +327,10 @@
             <div class="logo-container">
                 <img src="idlogo.jpg" alt="Creator Logo" class="logo-img">
             </div>
-            <div class="instagram-text">@2k_onito_.064</div>
-            <div class="instagram-subtitle">Created by</div>
+            <div class="instagram-text-container">
+                <div class="instagram-text">@2k_onito_.064</div>
+                <div class="instagram-subtitle">Created by</div>
+            </div>
         </a>
 
         <div class="card">
