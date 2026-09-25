@@ -15,16 +15,14 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
             color: #e0e0e0;
         }
 
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .card {
@@ -33,7 +31,7 @@
             border-radius: 12px;
             padding: 40px 30px;
             box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
-            text-align: center;
+            margin-bottom: 30px;
         }
 
         .title {
@@ -42,6 +40,7 @@
             color: #00d4ff;
             margin-bottom: 10px;
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            text-align: center;
         }
 
         .subtitle {
@@ -49,6 +48,7 @@
             color: #b0b0b0;
             margin-bottom: 30px;
             line-height: 1.5;
+            text-align: center;
         }
 
         .input-group {
@@ -80,6 +80,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            margin-bottom: 25px;
         }
 
         button {
@@ -123,11 +124,10 @@
         }
 
         .message {
-            margin-top: 20px;
+            margin-bottom: 20px;
             font-size: 14px;
             padding: 12px 16px;
             border-radius: 8px;
-            min-height: 20px;
             display: none;
         }
 
@@ -143,6 +143,73 @@
             color: #00ff88;
             border: 1px solid #00ff88;
             display: block;
+        }
+
+        .preview-section {
+            display: none;
+        }
+
+        .preview-section.active {
+            display: block;
+        }
+
+        .preview-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .preview-files {
+            background: #0f0f1e;
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            color: #00d4ff;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+
+        .programs-preview {
+            margin-top: 20px;
+        }
+
+        .program-item {
+            background: #0f0f1e;
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .program-number {
+            font-size: 12px;
+            color: #00d4ff;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .program-title {
+            font-size: 16px;
+            color: #00ff88;
+            font-weight: bold;
         }
 
         @media (max-width: 480px) {
@@ -162,6 +229,14 @@
                 padding: 12px 20px;
                 font-size: 14px;
             }
+
+            .preview-title {
+                font-size: 16px;
+            }
+
+            .program-title {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -169,7 +244,7 @@
     <div class="container">
         <div class="card">
             <div class="title">C File Generator</div>
-            <div class="subtitle">Enter your name and generate your C file.</div>
+            <div class="subtitle">Enter your name and generate your C programs.</div>
             
             <div class="input-group">
                 <input 
@@ -177,20 +252,44 @@
                     id="nameInput" 
                     placeholder="Enter your name"
                     autocomplete="off"
+                    oninput="updatePreview()"
                 >
             </div>
 
             <div class="button-group">
-                <button class="generate-btn" onclick="generateCFile()">Generate C File</button>
+                <button class="generate-btn" onclick="generateCFiles()">Generate C Files</button>
                 <button class="codestore-btn" onclick="goToCodeStore()">Code Store</button>
             </div>
 
             <div class="message" id="message"></div>
+
+            <div class="preview-section" id="previewSection">
+                <div class="preview-title">Generated Files</div>
+                <div class="preview-files">
+                    <ul class="file-list" id="fileList"></ul>
+                </div>
+                
+                <div class="programs-preview">
+                    <div class="program-item">
+                        <div class="program-number">Program 1</div>
+                        <div class="program-title">Two Number Input</div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-number">Program 2</div>
+                        <div class="program-title">Arithmetic Operations</div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-number">Program 3</div>
+                        <div class="program-title">Relational Operators</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        const cTemplate = `#include <stdio.h>
+        const cPrograms = {
+            program1: `#include <stdio.h>
 
 int main() {
     int a, b;
@@ -199,7 +298,35 @@ int main() {
     printf("First number = %d\\n", a);
     printf("Second number = %d", b);
     return 0;
-}`;
+}`,
+            program2: `#include <stdio.h>
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("Addition %d\\n", a + b);
+    printf("Subtraction %d\\n", a - b);
+    printf("Multiplication %d\\n", a * b);
+    printf("Division %d\\n", a / b);
+    printf("Remainder %d", a % b);
+    return 0;
+}`,
+            program3: `#include <stdio.h>
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("a > b = %d\\n", a > b);
+    printf("a < b = %d\\n", a < b);
+    printf("a == b = %d\\n", a == b);
+    printf("a != b = %d\\n", a != b);
+    printf("a >= b = %d\\n", a >= b);
+    printf("a <= b = %d", a <= b);
+    return 0;
+}`
+        };
 
         function sanitizeFilename(name) {
             // Remove leading and trailing spaces
@@ -221,7 +348,52 @@ int main() {
             }
         }
 
-        function generateCFile() {
+        function updatePreview() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value.trim();
+            const previewSection = document.getElementById('previewSection');
+
+            if (!name) {
+                previewSection.classList.remove('active');
+                return;
+            }
+
+            const sanitized = sanitizeFilename(name);
+            if (!sanitized) {
+                previewSection.classList.remove('active');
+                return;
+            }
+
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = `
+                <li>${sanitized}01.c</li>
+                <li>${sanitized}02.c</li>
+                <li>${sanitized}03.c</li>
+            `;
+
+            previewSection.classList.add('active');
+        }
+
+        function downloadFile(content, filename) {
+            return new Promise((resolve) => {
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Give browser time to process download
+                setTimeout(() => {
+                    URL.revokeObjectURL(url);
+                    resolve();
+                }, 100);
+            });
+        }
+
+        async function generateCFiles() {
             const nameInput = document.getElementById('nameInput');
             const name = nameInput.value;
 
@@ -236,21 +408,13 @@ int main() {
                 return;
             }
 
-            const filename = `${sanitized}01.c`;
-            
-            // Create blob and download
-            const blob = new Blob([cTemplate], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
+            // Download all three files in sequence
+            await downloadFile(cPrograms.program1, `${sanitized}01.c`);
+            await downloadFile(cPrograms.program2, `${sanitized}02.c`);
+            await downloadFile(cPrograms.program3, `${sanitized}03.c`);
 
-            showMessage(`Generated: ${filename}`, 'success');
-            nameInput.value = '';
+            const message = `3 C files generated successfully!\n${sanitized}01.c\n${sanitized}02.c\n${sanitized}03.c`;
+            showMessage(message, 'success');
         }
 
         function goToCodeStore() {
@@ -260,9 +424,12 @@ int main() {
         // Allow Enter key to generate
         document.getElementById('nameInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                generateCFile();
+                generateCFiles();
             }
         });
+
+        // Initialize preview on load
+        updatePreview();
     </script>
 </body>
 </html>
