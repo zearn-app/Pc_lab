@@ -103,7 +103,7 @@
             display: block;
         }
 
-        .use-btn {
+        .view-btn {
             width: 100%;
             padding: 14px 24px;
             font-size: 16px;
@@ -119,12 +119,12 @@
             box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
         }
 
-        .use-btn:hover {
+        .view-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
         }
 
-        .use-btn:active {
+        .view-btn:active {
             transform: translateY(0);
         }
 
@@ -152,7 +152,7 @@
                 font-size: 12px;
             }
 
-            .use-btn {
+            .view-btn {
                 padding: 12px 20px;
                 font-size: 14px;
             }
@@ -166,8 +166,9 @@
             <div class="title">C Code Store</div>
         </div>
 
+        <!-- Program 1 Card -->
         <div class="card">
-            <div class="code-title">Two Number Input Program</div>
+            <div class="code-title">Program 1 — Two Number Input</div>
             <div class="code-description">
                 Reads two integers and displays them separately.
             </div>
@@ -185,16 +186,65 @@ int main() {
 }</code>
             </div>
 
-            <button class="use-btn" onclick="useThisCode()">Use This Code</button>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 2 Card -->
+        <div class="card">
+            <div class="code-title">Program 2 — Arithmetic Operations</div>
+            <div class="code-description">
+                Performs addition, subtraction, multiplication, division and remainder operations on two integers.
+            </div>
+
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("Addition %d\n", a + b);
+    printf("Subtraction %d\n", a - b);
+    printf("Multiplication %d\n", a * b);
+    printf("Division %d\n", a / b);
+    printf("Remainder %d", a % b);
+    return 0;
+}</code>
+            </div>
+
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Program 3 Card -->
+        <div class="card">
+            <div class="code-title">Program 3 — Relational Operators</div>
+            <div class="code-description">
+                Demonstrates relational operators using two integers.
+            </div>
+
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("a > b = %d\n", a > b);
+    printf("a < b = %d\n", a < b);
+    printf("a == b = %d\n", a == b);
+    printf("a != b = %d\n", a != b);
+    printf("a >= b = %d\n", a >= b);
+    printf("a <= b = %d", a <= b);
+    return 0;
+}</code>
+            </div>
+
+            <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
     </div>
 
     <script>
         function goBack() {
-            window.location.href = 'index.html';
-        }
-
-        function useThisCode() {
             window.location.href = 'index.html';
         }
     </script>
