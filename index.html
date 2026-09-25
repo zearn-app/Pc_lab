@@ -28,6 +28,58 @@
             flex: 1;
         }
 
+        .instagram-header {
+            background: linear-gradient(135deg, #e4405f, #fd1d1d);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(228, 64, 95, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .instagram-header:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(228, 64, 95, 0.5);
+        }
+
+        .instagram-header:active {
+            transform: translateY(-1px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+        }
+
+        .instagram-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .instagram-subtitle {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
         .card {
             background: #16213e;
             border: 2px solid #00d4ff;
@@ -214,68 +266,6 @@
             text-align: center;
         }
 
-        footer {
-            background: #16213e;
-            border: 2px solid #00d4ff;
-            border-radius: 12px;
-            padding: 25px 20px;
-            margin-top: auto;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .footer-logos {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .logo-img {
-            height: 40px;
-            width: auto;
-            filter: brightness(1.1);
-        }
-
-        .footer-text {
-            font-size: 14px;
-            color: #b0b0b0;
-            line-height: 1.6;
-        }
-
-        .instagram-handle {
-            font-size: 15px;
-            font-weight: bold;
-            color: #00ff88;
-            font-family: 'Courier New', monospace;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .contact-info {
-            font-size: 14px;
-            color: #00d4ff;
-            font-weight: 600;
-        }
-
-        .divider {
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, #00d4ff, #00ff88);
-            margin: 10px auto;
-        }
-
         @media (max-width: 480px) {
             .card {
                 padding: 30px 20px;
@@ -302,26 +292,35 @@
                 grid-template-columns: 1fr;
             }
 
-            footer {
-                padding: 20px 15px;
-            }
-
-            .footer-text {
-                font-size: 13px;
-            }
-
-            .instagram-handle {
-                font-size: 13px;
+            .instagram-header {
+                padding: 15px;
+                margin-bottom: 25px;
             }
 
             .logo-img {
-                height: 35px;
+                height: 40px;
+            }
+
+            .instagram-text {
+                font-size: 14px;
+            }
+
+            .instagram-subtitle {
+                font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="https://www.instagram.com/2k_onito_.064?stkn=MTR1bHNvb29hZmFzMQ==" target="_blank" class="instagram-header">
+            <div class="logo-container">
+                <img src="idlogo.png" alt="Creator Logo" class="logo-img">
+            </div>
+            <div class="instagram-text">@2k_onito_.064</div>
+            <div class="instagram-subtitle">Created by</div>
+        </a>
+
         <div class="card">
             <div class="title">C File Generator</div>
             <div class="subtitle">Enter your name and generate C programs by exercise.</div>
@@ -369,24 +368,6 @@
             <button class="codestore-btn" onclick="goToCodeStore()">View Code Store</button>
         </div>
     </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="divider"></div>
-            <div class="footer-logos">
-                <img src="idlogo.png" alt="ID Logo" class="logo-img">
-                <img src="instalogo.png" alt="Instagram Logo" class="logo-img">
-            </div>
-            <div class="footer-text">Created by</div>
-            <div class="instagram-handle">
-                <span>@2k_onito_.064</span>
-            </div>
-            <div class="footer-text">Any enquiries</div>
-            <div class="contact-info">📞 Call: 8680852640</div>
-            <div class="contact-info">💬 DM on Instagram</div>
-            <div class="divider"></div>
-        </div>
-    </footer>
 
     <script>
         // Exercise 1: Operators (7 programs)
