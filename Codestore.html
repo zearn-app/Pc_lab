@@ -187,10 +187,156 @@
             <div class="title">C Code Store</div>
         </div>
 
-        <!-- EXERCISE 1: Control Flow Statements -->
-        <div class="exercise-header">Exercise 1: Control Flow Statements</div>
+        <!-- EXERCISE 1: Operators -->
+        <div class="exercise-header">Exercise 1: Operators</div>
 
-        <!-- Exercise 1 - Program 1 -->
+        <!-- Exercise 1 - Program 1: Input and Output -->
+        <div class="card">
+            <div class="code-title">1. Input and Output Statements</div>
+            <div class="code-description">Read two numbers from the user and display their values.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("First number = %d\n", a);
+    printf("Second number = %d", b);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Exercise 1 - Program 2: Arithmetic Operators -->
+        <div class="card">
+            <div class="code-title">2. Arithmetic Operators</div>
+            <div class="code-description">Perform addition, subtraction, multiplication, division and remainder operations.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("Addition = %d\n", a + b);
+    printf("Subtraction = %d\n", a - b);
+    printf("Multiplication = %d\n", a * b);
+    printf("Division = %d\n", a / b);
+    printf("Remainder = %d", a % b);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Exercise 1 - Program 3: Relational Operators -->
+        <div class="card">
+            <div class="code-title">3. Relational Operators</div>
+            <div class="code-description">Compare two numbers using relational operators.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("a > b = %d\n", a > b);
+    printf("a < b = %d\n", a < b);
+    printf("a == b = %d\n", a == b);
+    printf("a != b = %d\n", a != b);
+    printf("a >= b = %d\n", a >= b);
+    printf("a <= b = %d", a <= b);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Exercise 1 - Program 4: Logical Operators -->
+        <div class="card">
+            <div class="code-title">4. Logical Operators</div>
+            <div class="code-description">Demonstrate AND (&&), OR (||) and NOT (!) operators.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("(a > 0 && b > 0) = %d\n", (a > 0 && b > 0));
+    printf("(a > 0 || b > 0) = %d\n", (a > 0 || b > 0));
+    printf("!(a > 0) = %d", !(a > 0));
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Exercise 1 - Program 5: Assignment & Increment -->
+        <div class="card">
+            <div class="code-title">5. Assignment and Increment Operators</div>
+            <div class="code-description">Demonstrate assignment (=), increment (++) and decrement (--) operators.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a;
+    a = 10;
+    printf("Initial value = %d\n", a);
+    a++;
+    printf("After increment = %d\n", a);
+    a--;
+    printf("After decrement = %d", a);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Exercise 1 - Program 6: Expression Evaluation -->
+        <div class="card">
+            <div class="code-title">6. Expression Evaluation</div>
+            <div class="code-description">Evaluate an arithmetic expression using operator precedence.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b, c, result;
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &a, &b, &c);
+    result = a + b * c;
+    printf("Result = %d", result);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- Exercise 1 - Program 7: Conditional Operator -->
+        <div class="card">
+            <div class="code-title">7. Conditional (Ternary) Operator</div>
+            <div class="code-description">Find the larger of two numbers using the conditional operator.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b, largest;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    largest = (a > b) ? a : b;
+    printf("Largest = %d", largest);
+    return 0;
+}</code>
+            </div>
+            <button class="view-btn" onclick="goBack()">View Code</button>
+        </div>
+
+        <!-- EXERCISE 2: Control Flow Statements -->
+        <div class="exercise-header">Exercise 2: Control Flow Statements</div>
+
+        <!-- Exercise 2 - Program 1: if -->
         <div class="card">
             <div class="code-title">1. if Statement</div>
             <div class="code-description">Check whether a number is positive using a simple if statement.</div>
@@ -209,7 +355,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Exercise 1 - Program 2 -->
+        <!-- Exercise 2 - Program 2: if-else -->
         <div class="card">
             <div class="code-title">2. if-else Statement</div>
             <div class="code-description">Check whether a number is even or odd using if-else.</div>
@@ -230,7 +376,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Exercise 1 - Program 3 -->
+        <!-- Exercise 2 - Program 3: Nested if -->
         <div class="card">
             <div class="code-title">3. Nested if Statement</div>
             <div class="code-description">Find the largest of three numbers using nested if statements.</div>
@@ -259,7 +405,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Exercise 1 - Program 4 -->
+        <!-- Exercise 2 - Program 4: goto -->
         <div class="card">
             <div class="code-title">4. goto Statement</div>
             <div class="code-description">Demonstrate goto to repeat an input until a positive number is entered.</div>
@@ -280,7 +426,7 @@ input:
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Exercise 1 - Program 5 -->
+        <!-- Exercise 2 - Program 5: switch-case -->
         <div class="card">
             <div class="code-title">5. switch-case Statement</div>
             <div class="code-description">Display the day name based on a number using switch-case.</div>
@@ -310,7 +456,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Exercise 1 - Program 6 -->
+        <!-- Exercise 2 - Program 6: break -->
         <div class="card">
             <div class="code-title">6. break Statement</div>
             <div class="code-description">Stop a loop when the value reaches 5.</div>
@@ -330,7 +476,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Exercise 1 - Program 7 -->
+        <!-- Exercise 2 - Program 7: continue -->
         <div class="card">
             <div class="code-title">7. continue Statement</div>
             <div class="code-description">Skip the number 5 while printing numbers from 1 to 10.</div>
@@ -344,152 +490,6 @@ int main() {
             continue;
         printf("%d ", i);
     }
-    return 0;
-}</code>
-            </div>
-            <button class="view-btn" onclick="goBack()">View Code</button>
-        </div>
-
-        <!-- EXERCISE 2: Operators -->
-        <div class="exercise-header">Exercise 2: Operators</div>
-
-        <!-- Exercise 2 - Program 1 -->
-        <div class="card">
-            <div class="code-title">1. Input and Output Statements</div>
-            <div class="code-description">Read two numbers from the user and display their values.</div>
-            <div class="code-block">
-                <code>#include &lt;stdio.h&gt;
-
-int main() {
-    int a, b;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    printf("First number = %d\n", a);
-    printf("Second number = %d", b);
-    return 0;
-}</code>
-            </div>
-            <button class="view-btn" onclick="goBack()">View Code</button>
-        </div>
-
-        <!-- Exercise 2 - Program 2 -->
-        <div class="card">
-            <div class="code-title">2. Arithmetic Operators</div>
-            <div class="code-description">Perform addition, subtraction, multiplication, division and remainder operations.</div>
-            <div class="code-block">
-                <code>#include &lt;stdio.h&gt;
-
-int main() {
-    int a, b;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    printf("Addition = %d\n", a + b);
-    printf("Subtraction = %d\n", a - b);
-    printf("Multiplication = %d\n", a * b);
-    printf("Division = %d\n", a / b);
-    printf("Remainder = %d", a % b);
-    return 0;
-}</code>
-            </div>
-            <button class="view-btn" onclick="goBack()">View Code</button>
-        </div>
-
-        <!-- Exercise 2 - Program 3 -->
-        <div class="card">
-            <div class="code-title">3. Relational Operators</div>
-            <div class="code-description">Compare two numbers using relational operators.</div>
-            <div class="code-block">
-                <code>#include &lt;stdio.h&gt;
-
-int main() {
-    int a, b;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    printf("a > b = %d\n", a > b);
-    printf("a < b = %d\n", a < b);
-    printf("a == b = %d\n", a == b);
-    printf("a != b = %d\n", a != b);
-    printf("a >= b = %d\n", a >= b);
-    printf("a <= b = %d", a <= b);
-    return 0;
-}</code>
-            </div>
-            <button class="view-btn" onclick="goBack()">View Code</button>
-        </div>
-
-        <!-- Exercise 2 - Program 4 -->
-        <div class="card">
-            <div class="code-title">4. Logical Operators</div>
-            <div class="code-description">Demonstrate AND (&&), OR (||) and NOT (!) operators.</div>
-            <div class="code-block">
-                <code>#include &lt;stdio.h&gt;
-
-int main() {
-    int a, b;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    printf("(a > 0 && b > 0) = %d\n", (a > 0 && b > 0));
-    printf("(a > 0 || b > 0) = %d\n", (a > 0 || b > 0));
-    printf("!(a > 0) = %d", !(a > 0));
-    return 0;
-}</code>
-            </div>
-            <button class="view-btn" onclick="goBack()">View Code</button>
-        </div>
-
-        <!-- Exercise 2 - Program 5 -->
-        <div class="card">
-            <div class="code-title">5. Assignment & Increment Operators</div>
-            <div class="code-description">Demonstrate assignment (=), increment (++) and decrement (--) operators.</div>
-            <div class="code-block">
-                <code>#include &lt;stdio.h&gt;
-
-int main() {
-    int a;
-    a = 10;
-    printf("Initial value = %d\n", a);
-    a++;
-    printf("After increment = %d\n", a);
-    a--;
-    printf("After decrement = %d", a);
-    return 0;
-}</code>
-            </div>
-            <button class="view-btn" onclick="goBack()">View Code</button>
-        </div>
-
-        <!-- Exercise 2 - Program 6 -->
-        <div class="card">
-            <div class="code-title">6. Expression Evaluation</div>
-            <div class="code-description">Evaluate an arithmetic expression using operator precedence.</div>
-            <div class="code-block">
-                <code>#include &lt;stdio.h&gt;
-
-int main() {
-    int a, b, c, result;
-    printf("Enter three numbers: ");
-    scanf("%d %d %d", &a, &b, &c);
-    result = a + b * c;
-    printf("Result = %d", result);
-    return 0;
-}</code>
-            </div>
-            <button class="view-btn" onclick="goBack()">View Code</button>
-        </div>
-
-        <!-- Exercise 2 - Program 7 -->
-        <div class="card">
-            <div class="code-title">7. Conditional (Ternary) Operator</div>
-            <div class="code-description">Find the larger of two numbers using the conditional operator.</div>
-            <div class="code-block">
-                <code>#include &lt;stdio.h&gt;
-
-int main() {
-    int a, b, largest;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    largest = (a > b) ? a : b;
-    printf("Largest = %d", largest);
     return 0;
 }</code>
             </div>
