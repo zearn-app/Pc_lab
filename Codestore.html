@@ -62,17 +62,26 @@
             min-width: 200px;
         }
 
+        .exercise-header {
+            font-size: 26px;
+            font-weight: bold;
+            color: #00ff88;
+            margin: 40px 0 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #00d4ff;
+        }
+
         .card {
             background: #16213e;
             border: 2px solid #00d4ff;
             border-radius: 12px;
-            padding: 25px;
+            padding: 22px;
             box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .code-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #00ff88;
             margin-bottom: 8px;
@@ -92,7 +101,7 @@
             padding: 15px;
             margin-bottom: 15px;
             overflow-x: auto;
-            max-height: 300px;
+            max-height: 280px;
             overflow-y: auto;
         }
 
@@ -142,6 +151,11 @@
                 width: 100%;
             }
 
+            .exercise-header {
+                font-size: 22px;
+                margin: 30px 0 20px 0;
+            }
+
             .card {
                 padding: 18px;
                 margin-bottom: 15px;
@@ -173,7 +187,10 @@
             <div class="title">C Code Store</div>
         </div>
 
-        <!-- Program 1 -->
+        <!-- EXERCISE 1: Control Flow Statements -->
+        <div class="exercise-header">Exercise 1: Control Flow Statements</div>
+
+        <!-- Exercise 1 - Program 1 -->
         <div class="card">
             <div class="code-title">1. if Statement</div>
             <div class="code-description">Check whether a number is positive using a simple if statement.</div>
@@ -192,7 +209,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 2 -->
+        <!-- Exercise 1 - Program 2 -->
         <div class="card">
             <div class="code-title">2. if-else Statement</div>
             <div class="code-description">Check whether a number is even or odd using if-else.</div>
@@ -213,7 +230,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 3 -->
+        <!-- Exercise 1 - Program 3 -->
         <div class="card">
             <div class="code-title">3. Nested if Statement</div>
             <div class="code-description">Find the largest of three numbers using nested if statements.</div>
@@ -242,7 +259,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 4 -->
+        <!-- Exercise 1 - Program 4 -->
         <div class="card">
             <div class="code-title">4. goto Statement</div>
             <div class="code-description">Demonstrate goto to repeat an input until a positive number is entered.</div>
@@ -263,7 +280,7 @@ input:
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 5 -->
+        <!-- Exercise 1 - Program 5 -->
         <div class="card">
             <div class="code-title">5. switch-case Statement</div>
             <div class="code-description">Display the day name based on a number using switch-case.</div>
@@ -293,7 +310,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 6 -->
+        <!-- Exercise 1 - Program 6 -->
         <div class="card">
             <div class="code-title">6. break Statement</div>
             <div class="code-description">Stop a loop when the value reaches 5.</div>
@@ -313,7 +330,7 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 7 -->
+        <!-- Exercise 1 - Program 7 -->
         <div class="card">
             <div class="code-title">7. continue Statement</div>
             <div class="code-description">Skip the number 5 while printing numbers from 1 to 10.</div>
@@ -333,9 +350,12 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 8 -->
+        <!-- EXERCISE 2: Operators -->
+        <div class="exercise-header">Exercise 2: Operators</div>
+
+        <!-- Exercise 2 - Program 1 -->
         <div class="card">
-            <div class="code-title">8. Input and Output Statements</div>
+            <div class="code-title">1. Input and Output Statements</div>
             <div class="code-description">Read two numbers from the user and display their values.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
@@ -352,9 +372,9 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 9 -->
+        <!-- Exercise 2 - Program 2 -->
         <div class="card">
-            <div class="code-title">9. Arithmetic Operators</div>
+            <div class="code-title">2. Arithmetic Operators</div>
             <div class="code-description">Perform addition, subtraction, multiplication, division and remainder operations.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
@@ -374,9 +394,9 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 10 -->
+        <!-- Exercise 2 - Program 3 -->
         <div class="card">
-            <div class="code-title">10. Relational Operators</div>
+            <div class="code-title">3. Relational Operators</div>
             <div class="code-description">Compare two numbers using relational operators.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
@@ -397,9 +417,9 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 11 -->
+        <!-- Exercise 2 - Program 4 -->
         <div class="card">
-            <div class="code-title">11. Logical Operators</div>
+            <div class="code-title">4. Logical Operators</div>
             <div class="code-description">Demonstrate AND (&&), OR (||) and NOT (!) operators.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
@@ -417,9 +437,9 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 12 -->
+        <!-- Exercise 2 - Program 5 -->
         <div class="card">
-            <div class="code-title">12. Assignment & Increment Operators</div>
+            <div class="code-title">5. Assignment & Increment Operators</div>
             <div class="code-description">Demonstrate assignment (=), increment (++) and decrement (--) operators.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
@@ -438,9 +458,9 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 13 -->
+        <!-- Exercise 2 - Program 6 -->
         <div class="card">
-            <div class="code-title">13. Expression Evaluation</div>
+            <div class="code-title">6. Expression Evaluation</div>
             <div class="code-description">Evaluate an arithmetic expression using operator precedence.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
@@ -457,9 +477,9 @@ int main() {
             <button class="view-btn" onclick="goBack()">View Code</button>
         </div>
 
-        <!-- Program 14 -->
+        <!-- Exercise 2 - Program 7 -->
         <div class="card">
-            <div class="code-title">14. Conditional (Ternary) Operator</div>
+            <div class="code-title">7. Conditional (Ternary) Operator</div>
             <div class="code-description">Find the larger of two numbers using the conditional operator.</div>
             <div class="code-block">
                 <code>#include &lt;stdio.h&gt;
