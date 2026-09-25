@@ -129,6 +129,8 @@
             padding: 12px 16px;
             border-radius: 8px;
             display: none;
+            max-height: 200px;
+            overflow-y: auto;
         }
 
         .message.error {
@@ -143,6 +145,7 @@
             color: #00ff88;
             border: 1px solid #00ff88;
             display: block;
+            white-space: pre-line;
         }
 
         .preview-section {
@@ -167,23 +170,27 @@
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .file-list {
             list-style: none;
             padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
         .file-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #333;
+            padding: 8px;
+            background: #16213e;
+            border: 1px solid #00d4ff;
+            border-radius: 4px;
             color: #00d4ff;
             font-family: 'Courier New', monospace;
-            font-size: 14px;
-        }
-
-        .file-list li:last-child {
-            border-bottom: none;
+            font-size: 12px;
+            text-align: center;
         }
 
         .programs-preview {
@@ -194,20 +201,21 @@
             background: #0f0f1e;
             border: 1px solid #00d4ff;
             border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 13px;
         }
 
         .program-number {
-            font-size: 12px;
+            font-size: 11px;
             color: #00d4ff;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .program-title {
-            font-size: 16px;
+            font-size: 14px;
             color: #00ff88;
             font-weight: bold;
         }
@@ -230,12 +238,13 @@
                 font-size: 14px;
             }
 
-            .preview-title {
-                font-size: 16px;
+            .file-list {
+                grid-template-columns: 1fr;
             }
 
-            .program-title {
-                font-size: 14px;
+            .program-item {
+                padding: 10px;
+                font-size: 12px;
             }
         }
     </style>
@@ -244,7 +253,7 @@
     <div class="container">
         <div class="card">
             <div class="title">C File Generator</div>
-            <div class="subtitle">Enter your name and generate your C programs.</div>
+            <div class="subtitle">Enter your name and generate 14 C programs.</div>
             
             <div class="input-group">
                 <input 
@@ -268,21 +277,6 @@
                 <div class="preview-files">
                     <ul class="file-list" id="fileList"></ul>
                 </div>
-                
-                <div class="programs-preview">
-                    <div class="program-item">
-                        <div class="program-number">Program 1</div>
-                        <div class="program-title">Two Number Input</div>
-                    </div>
-                    <div class="program-item">
-                        <div class="program-number">Program 2</div>
-                        <div class="program-title">Arithmetic Operations</div>
-                    </div>
-                    <div class="program-item">
-                        <div class="program-number">Program 3</div>
-                        <div class="program-title">Relational Operators</div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -292,6 +286,103 @@
             program1: `#include <stdio.h>
 
 int main() {
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    if (n > 0)
+        printf("The number is positive.");
+    return 0;
+}`,
+            program2: `#include <stdio.h>
+
+int main() {
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    if (n % 2 == 0)
+        printf("Even number");
+    else
+        printf("Odd number");
+    return 0;
+}`,
+            program3: `#include <stdio.h>
+
+int main() {
+    int a, b, c, largest;
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &a, &b, &c);
+    if (a > b) {
+        if (a > c)
+            largest = a;
+        else
+            largest = c;
+    } else {
+        if (b > c)
+            largest = b;
+        else
+            largest = c;
+    }
+    printf("Largest = %d", largest);
+    return 0;
+}`,
+            program4: `#include <stdio.h>
+
+int main() {
+    int n;
+input:
+    printf("Enter a positive number: ");
+    scanf("%d", &n);
+    if (n <= 0)
+        goto input;
+    printf("You entered %d", n);
+    return 0;
+}`,
+            program5: `#include <stdio.h>
+
+int main() {
+    int day;
+    printf("Enter a number (1-3): ");
+    scanf("%d", &day);
+    switch (day) {
+        case 1:
+            printf("Monday");
+            break;
+        case 2:
+            printf("Tuesday");
+            break;
+        case 3:
+            printf("Wednesday");
+            break;
+        default:
+            printf("Invalid choice");
+    }
+    return 0;
+}`,
+            program6: `#include <stdio.h>
+
+int main() {
+    int i;
+    for (i = 1; i <= 10; i++) {
+        if (i == 5)
+            break;
+        printf("%d ", i);
+    }
+    return 0;
+}`,
+            program7: `#include <stdio.h>
+
+int main() {
+    int i;
+    for (i = 1; i <= 10; i++) {
+        if (i == 5)
+            continue;
+        printf("%d ", i);
+    }
+    return 0;
+}`,
+            program8: `#include <stdio.h>
+
+int main() {
     int a, b;
     printf("Enter two numbers: ");
     scanf("%d %d", &a, &b);
@@ -299,20 +390,20 @@ int main() {
     printf("Second number = %d", b);
     return 0;
 }`,
-            program2: `#include <stdio.h>
+            program9: `#include <stdio.h>
 
 int main() {
     int a, b;
     printf("Enter two numbers: ");
     scanf("%d %d", &a, &b);
-    printf("Addition %d\\n", a + b);
-    printf("Subtraction %d\\n", a - b);
-    printf("Multiplication %d\\n", a * b);
-    printf("Division %d\\n", a / b);
-    printf("Remainder %d", a % b);
+    printf("Addition = %d\\n", a + b);
+    printf("Subtraction = %d\\n", a - b);
+    printf("Multiplication = %d\\n", a * b);
+    printf("Division = %d\\n", a / b);
+    printf("Remainder = %d", a % b);
     return 0;
 }`,
-            program3: `#include <stdio.h>
+            program10: `#include <stdio.h>
 
 int main() {
     int a, b;
@@ -325,13 +416,71 @@ int main() {
     printf("a >= b = %d\\n", a >= b);
     printf("a <= b = %d", a <= b);
     return 0;
+}`,
+            program11: `#include <stdio.h>
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("(a > 0 && b > 0) = %d\\n", (a > 0 && b > 0));
+    printf("(a > 0 || b > 0) = %d\\n", (a > 0 || b > 0));
+    printf("!(a > 0) = %d", !(a > 0));
+    return 0;
+}`,
+            program12: `#include <stdio.h>
+
+int main() {
+    int a;
+    a = 10;
+    printf("Initial value = %d\\n", a);
+    a++;
+    printf("After increment = %d\\n", a);
+    a--;
+    printf("After decrement = %d", a);
+    return 0;
+}`,
+            program13: `#include <stdio.h>
+
+int main() {
+    int a, b, c, result;
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &a, &b, &c);
+    result = a + b * c;
+    printf("Result = %d", result);
+    return 0;
+}`,
+            program14: `#include <stdio.h>
+
+int main() {
+    int a, b, largest;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    largest = (a > b) ? a : b;
+    printf("Largest = %d", largest);
+    return 0;
 }`
         };
 
+        const programTitles = [
+            "if Statement",
+            "if-else Statement",
+            "Nested if Statement",
+            "goto Statement",
+            "switch-case Statement",
+            "break Statement",
+            "continue Statement",
+            "Input and Output",
+            "Arithmetic Operators",
+            "Relational Operators",
+            "Logical Operators",
+            "Assignment & Increment",
+            "Expression Evaluation",
+            "Conditional Operator"
+        ];
+
         function sanitizeFilename(name) {
-            // Remove leading and trailing spaces
             name = name.trim();
-            // Remove unsafe filename characters, keep only letters, numbers, underscores, hyphens
             name = name.replace(/[^a-zA-Z0-9_-]/g, '');
             return name;
         }
@@ -344,7 +493,7 @@ int main() {
             if (type === 'success') {
                 setTimeout(() => {
                     msgElement.className = 'message';
-                }, 4000);
+                }, 5000);
             }
         }
 
@@ -365,12 +514,12 @@ int main() {
             }
 
             const fileList = document.getElementById('fileList');
-            fileList.innerHTML = `
-                <li>${sanitized}01.c</li>
-                <li>${sanitized}02.c</li>
-                <li>${sanitized}03.c</li>
-            `;
-
+            let html = '';
+            for (let i = 1; i <= 14; i++) {
+                const num = String(i).padStart(2, '0');
+                html += `<li>${sanitized}${num}.c</li>`;
+            }
+            fileList.innerHTML = html;
             previewSection.classList.add('active');
         }
 
@@ -385,7 +534,6 @@ int main() {
                 link.click();
                 document.body.removeChild(link);
                 
-                // Give browser time to process download
                 setTimeout(() => {
                     URL.revokeObjectURL(url);
                     resolve();
@@ -408,12 +556,18 @@ int main() {
                 return;
             }
 
-            // Download all three files in sequence
-            await downloadFile(cPrograms.program1, `${sanitized}01.c`);
-            await downloadFile(cPrograms.program2, `${sanitized}02.c`);
-            await downloadFile(cPrograms.program3, `${sanitized}03.c`);
+            // Download all 14 files in sequence
+            for (let i = 1; i <= 14; i++) {
+                const num = String(i).padStart(2, '0');
+                const key = `program${i}`;
+                await downloadFile(cPrograms[key], `${sanitized}${num}.c`);
+            }
 
-            const message = `3 C files generated successfully!\n${sanitized}01.c\n${sanitized}02.c\n${sanitized}03.c`;
+            let message = '14 C files generated successfully!\n\n';
+            for (let i = 1; i <= 14; i++) {
+                const num = String(i).padStart(2, '0');
+                message += `${sanitized}${num}.c\n`;
+            }
             showMessage(message, 'success');
         }
 
@@ -421,14 +575,12 @@ int main() {
             window.location.href = 'Codestore.html';
         }
 
-        // Allow Enter key to generate
         document.getElementById('nameInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 generateCFiles();
             }
         });
 
-        // Initialize preview on load
         updatePreview();
     </script>
 </body>
