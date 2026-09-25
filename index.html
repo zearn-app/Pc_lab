@@ -255,9 +255,9 @@
                 >
             </div>
 
-            <!-- Exercise 1 -->
+            <!-- Exercise 1: Operators -->
             <div class="exercise-section">
-                <div class="exercise-title">Exercise 1: Control Flow Statements</div>
+                <div class="exercise-title">Exercise 1: Operators</div>
                 <div class="button-group">
                     <button class="generate-btn" onclick="generateExercise1()">Generate Exercise 1 (7 Files)</button>
                 </div>
@@ -270,9 +270,9 @@
                 </div>
             </div>
 
-            <!-- Exercise 2 -->
+            <!-- Exercise 2: Control Flow -->
             <div class="exercise-section">
-                <div class="exercise-title">Exercise 2: Operators</div>
+                <div class="exercise-title">Exercise 2: Control Flow Statements</div>
                 <div class="button-group">
                     <button class="generate-btn" onclick="generateExercise2()">Generate Exercise 2 (7 Files)</button>
                 </div>
@@ -290,8 +290,92 @@
     </div>
 
     <script>
-        // Exercise 1: Control Flow Statements (7 programs)
+        // Exercise 1: Operators (7 programs)
         const exercise1Programs = {
+            program1: `#include <stdio.h>
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("First number = %d\\n", a);
+    printf("Second number = %d", b);
+    return 0;
+}`,
+            program2: `#include <stdio.h>
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("Addition = %d\\n", a + b);
+    printf("Subtraction = %d\\n", a - b);
+    printf("Multiplication = %d\\n", a * b);
+    printf("Division = %d\\n", a / b);
+    printf("Remainder = %d", a % b);
+    return 0;
+}`,
+            program3: `#include <stdio.h>
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("a > b = %d\\n", a > b);
+    printf("a < b = %d\\n", a < b);
+    printf("a == b = %d\\n", a == b);
+    printf("a != b = %d\\n", a != b);
+    printf("a >= b = %d\\n", a >= b);
+    printf("a <= b = %d", a <= b);
+    return 0;
+}`,
+            program4: `#include <stdio.h>
+
+int main() {
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    printf("(a > 0 && b > 0) = %d\\n", (a > 0 && b > 0));
+    printf("(a > 0 || b > 0) = %d\\n", (a > 0 || b > 0));
+    printf("!(a > 0) = %d", !(a > 0));
+    return 0;
+}`,
+            program5: `#include <stdio.h>
+
+int main() {
+    int a;
+    a = 10;
+    printf("Initial value = %d\\n", a);
+    a++;
+    printf("After increment = %d\\n", a);
+    a--;
+    printf("After decrement = %d", a);
+    return 0;
+}`,
+            program6: `#include <stdio.h>
+
+int main() {
+    int a, b, c, result;
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &a, &b, &c);
+    result = a + b * c;
+    printf("Result = %d", result);
+    return 0;
+}`,
+            program7: `#include <stdio.h>
+
+int main() {
+    int a, b, largest;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+    largest = (a > b) ? a : b;
+    printf("Largest = %d", largest);
+    return 0;
+}`
+        };
+
+        // Exercise 2: Control Flow Statements (7 programs)
+        const exercise2Programs = {
             program1: `#include <stdio.h>
 
 int main() {
@@ -390,110 +474,6 @@ int main() {
     return 0;
 }`
         };
-
-        // Exercise 2: Operators (7 programs)
-        const exercise2Programs = {
-            program1: `#include <stdio.h>
-
-int main() {
-    int a, b;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    printf("First number = %d\\n", a);
-    printf("Second number = %d", b);
-    return 0;
-}`,
-            program2: `#include <stdio.h>
-
-int main() {
-    int a, b;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    printf("Addition = %d\\n", a + b);
-    printf("Subtraction = %d\\n", a - b);
-    printf("Multiplication = %d\\n", a * b);
-    printf("Division = %d\\n", a / b);
-    printf("Remainder = %d", a % b);
-    return 0;
-}`,
-            program3: `#include <stdio.h>
-
-int main() {
-    int a, b;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    printf("a > b = %d\\n", a > b);
-    printf("a < b = %d\\n", a < b);
-    printf("a == b = %d\\n", a == b);
-    printf("a != b = %d\\n", a != b);
-    printf("a >= b = %d\\n", a >= b);
-    printf("a <= b = %d", a <= b);
-    return 0;
-}`,
-            program4: `#include <stdio.h>
-
-int main() {
-    int a, b;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    printf("(a > 0 && b > 0) = %d\\n", (a > 0 && b > 0));
-    printf("(a > 0 || b > 0) = %d\\n", (a > 0 || b > 0));
-    printf("!(a > 0) = %d", !(a > 0));
-    return 0;
-}`,
-            program5: `#include <stdio.h>
-
-int main() {
-    int a;
-    a = 10;
-    printf("Initial value = %d\\n", a);
-    a++;
-    printf("After increment = %d\\n", a);
-    a--;
-    printf("After decrement = %d", a);
-    return 0;
-}`,
-            program6: `#include <stdio.h>
-
-int main() {
-    int a, b, c, result;
-    printf("Enter three numbers: ");
-    scanf("%d %d %d", &a, &b, &c);
-    result = a + b * c;
-    printf("Result = %d", result);
-    return 0;
-}`,
-            program7: `#include <stdio.h>
-
-int main() {
-    int a, b, largest;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    largest = (a > b) ? a : b;
-    printf("Largest = %d", largest);
-    return 0;
-}`
-        };
-
-        const exercise1Titles = [
-            "if Statement",
-            "if-else Statement",
-            "Nested if Statement",
-            "goto Statement",
-            "switch-case Statement",
-            "break Statement",
-            "continue Statement"
-        ];
-
-        const exercise2Titles = [
-            "Input and Output",
-            "Arithmetic Operators",
-            "Relational Operators",
-            "Logical Operators",
-            "Assignment & Increment",
-            "Expression Evaluation",
-            "Conditional Operator"
-        ];
 
         function sanitizeFilename(name) {
             name = name.trim();
