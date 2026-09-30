@@ -28,25 +28,24 @@
             flex: 1;
         }
 
-        
         .instagram-header {
-    background: #6c44cc;  /* Simple Instagram Pink */
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 32px rgba(225, 48, 108, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
+            background: #E1306C;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(225, 48, 108, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-         .instagram-header:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(225, 48, 108, 0.5);
-}
+        .instagram-header:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(225, 48, 108, 0.5);
+        }
 
         .instagram-header:active {
             transform: translateY(-1px);
@@ -378,6 +377,21 @@
                 </div>
             </div>
 
+            <!-- Exercise 3: Loops & Number Programs -->
+            <div class="exercise-section">
+                <div class="exercise-title">Exercise 3: Loops & Number Programs</div>
+                <div class="button-group">
+                    <button class="generate-btn" onclick="generateExercise3()">Generate Exercise 3 (8 Files)</button>
+                </div>
+                <div class="message" id="message3"></div>
+                <div class="preview-section" id="previewSection3">
+                    <div class="preview-title">Exercise 3 Files</div>
+                    <div class="preview-files">
+                        <ul class="file-list" id="fileList3"></ul>
+                    </div>
+                </div>
+            </div>
+
             <button class="codestore-btn" onclick="goToCodeStore()">View Code Store</button>
         </div>
     </div>
@@ -568,6 +582,128 @@ int main() {
 }`
         };
 
+        // Exercise 3: Loops & Number Programs (8 programs)
+        const exercise3Programs = {
+            program1: `#include <stdio.h>
+
+int main() {
+    int n, i;
+    long long fact = 1;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    for (i = 1; i <= n; i++)
+        fact = fact * i;
+    printf("Factorial = %lld", fact);
+    return 0;
+}`,
+            program2: `#include <stdio.h>
+
+int main() {
+    int n, i, count = 0;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    for (i = 1; i <= n; i++) {
+        if (n % i == 0)
+            count++;
+    }
+    if (count == 2)
+        printf("%d is a Prime Number", n);
+    else
+        printf("%d is Not a Prime Number", n);
+    return 0;
+}`,
+            program3: `#include <stdio.h>
+
+int main() {
+    int n, digit, reverse = 0;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    while (n != 0) {
+        digit = n % 10;
+        reverse = reverse * 10 + digit;
+        n = n / 10;
+    }
+    printf("Reversed Number = %d", reverse);
+    return 0;
+}`,
+            program4: `#include <stdio.h>
+
+int main() {
+    int n, original, digit, reverse = 0;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    original = n;
+    while (n != 0) {
+        digit = n % 10;
+        reverse = reverse * 10 + digit;
+        n = n / 10;
+    }
+    if (original == reverse)
+        printf("%d is a Palindrome", original);
+    else
+        printf("%d is Not a Palindrome", original);
+    return 0;
+}`,
+            program5: `#include <stdio.h>
+
+int main() {
+    int n, i;
+    int first = 0, second = 1, next;
+    printf("Enter number of terms: ");
+    scanf("%d", &n);
+    printf("Fibonacci Series: ");
+    for (i = 1; i <= n; i++) {
+        printf("%d ", first);
+        next = first + second;
+        first = second;
+        second = next;
+    }
+    return 0;
+}`,
+            program6: `#include <stdio.h>
+
+int main() {
+    int n, original, digit, sum = 0;
+    printf("Enter a three-digit number: ");
+    scanf("%d", &n);
+    original = n;
+    while (n != 0) {
+        digit = n % 10;
+        sum = sum + digit * digit * digit;
+        n = n / 10;
+    }
+    if (sum == original)
+        printf("%d is an Armstrong Number", original);
+    else
+        printf("%d is Not an Armstrong Number", original);
+    return 0;
+}`,
+            program7: `#include <stdio.h>
+
+int main() {
+    int n, digit, sum = 0;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    while (n != 0) {
+        digit = n % 10;
+        sum = sum + digit;
+        n = n / 10;
+    }
+    printf("Sum of Digits = %d", sum);
+    return 0;
+}`,
+            program8: `#include <stdio.h>
+
+int main() {
+    int n, i;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+    for (i = 1; i <= 10; i++)
+        printf("%d x %d = %d\\n", n, i, n * i);
+    return 0;
+}`
+        };
+
         function sanitizeFilename(name) {
             name = name.trim();
             name = name.replace(/[^a-zA-Z0-9_-]/g, '');
@@ -593,6 +729,7 @@ int main() {
             if (!name) {
                 document.getElementById('previewSection1').classList.remove('active');
                 document.getElementById('previewSection2').classList.remove('active');
+                document.getElementById('previewSection3').classList.remove('active');
                 return;
             }
 
@@ -600,6 +737,7 @@ int main() {
             if (!sanitized) {
                 document.getElementById('previewSection1').classList.remove('active');
                 document.getElementById('previewSection2').classList.remove('active');
+                document.getElementById('previewSection3').classList.remove('active');
                 return;
             }
 
@@ -614,105 +752,4 @@ int main() {
             document.getElementById('previewSection1').classList.add('active');
 
             // Update Exercise 2 preview
-            const fileList2 = document.getElementById('fileList2');
-            let html2 = '';
-            for (let i = 1; i <= 7; i++) {
-                const num = String(i).padStart(2, '0');
-                html2 += `<li>${sanitized}${num}.c</li>`;
-            }
-            fileList2.innerHTML = html2;
-            document.getElementById('previewSection2').classList.add('active');
-        }
-
-        function downloadFile(content, filename) {
-            return new Promise((resolve) => {
-                const blob = new Blob([content], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                
-                setTimeout(() => {
-                    URL.revokeObjectURL(url);
-                    resolve();
-                }, 100);
-            });
-        }
-
-        async function generateExercise1() {
-            const nameInput = document.getElementById('nameInput');
-            const name = nameInput.value;
-
-            if (!name.trim()) {
-                showMessage('message1', 'Please enter your name.', 'error');
-                return;
-            }
-
-            const sanitized = sanitizeFilename(name);
-            if (!sanitized) {
-                showMessage('message1', 'Please enter a valid name.', 'error');
-                return;
-            }
-
-            // Download all 7 files for Exercise 1
-            for (let i = 1; i <= 7; i++) {
-                const num = String(i).padStart(2, '0');
-                const key = `program${i}`;
-                await downloadFile(exercise1Programs[key], `${sanitized}${num}.c`);
-            }
-
-            let message = 'Exercise 1: 7 C files generated successfully!\n\n';
-            for (let i = 1; i <= 7; i++) {
-                const num = String(i).padStart(2, '0');
-                message += `${sanitized}${num}.c\n`;
-            }
-            showMessage('message1', message, 'success');
-        }
-
-        async function generateExercise2() {
-            const nameInput = document.getElementById('nameInput');
-            const name = nameInput.value;
-
-            if (!name.trim()) {
-                showMessage('message2', 'Please enter your name.', 'error');
-                return;
-            }
-
-            const sanitized = sanitizeFilename(name);
-            if (!sanitized) {
-                showMessage('message2', 'Please enter a valid name.', 'error');
-                return;
-            }
-
-            // Download all 7 files for Exercise 2
-            for (let i = 1; i <= 7; i++) {
-                const num = String(i).padStart(2, '0');
-                const key = `program${i}`;
-                await downloadFile(exercise2Programs[key], `${sanitized}${num}.c`);
-            }
-
-            let message = 'Exercise 2: 7 C files generated successfully!\n\n';
-            for (let i = 1; i <= 7; i++) {
-                const num = String(i).padStart(2, '0');
-                message += `${sanitized}${num}.c\n`;
-            }
-            showMessage('message2', message, 'success');
-        }
-
-        function goToCodeStore() {
-            window.location.href = 'Codestore.html';
-        }
-
-        document.getElementById('nameInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                generateExercise1();
-            }
-        });
-
-        updatePreview();
-    </script>
-</body>
-</html>
+            const fileList2 = document.getElementB
