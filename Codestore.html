@@ -736,5 +736,100 @@ int main() {
 }</code>
             </div>
         </div>
+ <!-- EXERCISE 4: Arrays (Files 23-24) -->
+        <div class="exercise-header">Exercise 4: Arrays (Files 23-24)</div>
+
+        <div class="card">
+            <div class="code-title">23. Sum and Average of 10 Numbers using 1D Array</div>
+            <div class="code-description">Read 10 numbers into an array, calculate sum and average.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int arr[10];
+    int i, sum = 0;
+    float avg;
+    
+    printf("Enter 10 integer values:\n");
+    for(i = 0; i < 10; i++) {
+        printf("Element [%d]: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+    
+    for(i = 0; i < 10; i++) {
+        sum += arr[i];
+    }
+    
+    avg = (float)sum / 10;
+    
+    printf("\n--- RESULTS ---\n");
+    printf("Sum of 10 numbers = %d\n", sum);
+    printf("Average of 10 numbers = %.2f\n", avg);
+    
+    return 0;
+}</code>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="code-title">24. Matrix Multiplication using 2D Arrays</div>
+            <div class="code-description">Multiply two 2D matrices and display result.</div>
+            <div class="code-block">
+                <code>#include &lt;stdio.h&gt;
+
+int main() {
+    int A[10][10], B[10][10], C[10][10];
+    int r1, c1, r2, c2, i, j, k;
+    
+    printf("Enter rows and columns for Matrix A: ");
+    scanf("%d %d", &r1, &c1);
+    printf("Enter rows and columns for Matrix B: ");
+    scanf("%d %d", &r2, &c2);
+    
+    if (c1 != r2) {
+        printf("\nError: Columns of A (%d) must equal Rows of B (%d)!\n", c1, r2);
+        return 1;
+    }
+    
+    printf("\nEnter elements of Matrix A (%dx%d):\n", r1, c1);
+    for(i = 0; i < r1; i++)
+        for(j = 0; j < c1; j++)
+            scanf("%d", &A[i][j]);
+    
+    printf("Enter elements of Matrix B (%dx%d):\n", r2, c2);
+    for(i = 0; i < r2; i++)
+        for(j = 0; j < c2; j++)
+            scanf("%d", &B[i][j]);
+    
+    for(i = 0; i < r1; i++) {
+        for(j = 0; j < c2; j++) {
+            C[i][j] = 0;
+            for(k = 0; k < c1; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+    
+    printf("\n--- RESULTANT MATRIX (A x B) ---\n");
+    for(i = 0; i < r1; i++) {
+        for(j = 0; j < c2; j++) {
+            printf("%d\t", C[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}</code>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
 
         
