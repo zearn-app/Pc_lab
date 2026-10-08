@@ -734,4 +734,462 @@ int main() {
 }`
         };
 
-        
+     // Exercise 4: Arrays (2 programs) - Files 23-24
+        const exercise4Programs = {
+            program1: `#include <stdio.h>
+
+int main() {
+    int arr[10];
+    int i, sum = 0;
+    float avg;
+    
+    printf("Enter 10 integer values:\\n");
+    for(i = 0; i < 10; i++) {
+        printf("Element [%d]: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+    
+    for(i = 0; i < 10; i++) {
+        sum += arr[i];
+    }
+    
+    avg = (float)sum / 10;
+    
+    printf("\\n--- RESULTS ---\\n");
+    printf("Sum of 10 numbers = %d\\n", sum);
+    printf("Average of 10 numbers = %.2f\\n", avg);
+    
+    return 0;
+}`,
+            program2: `#include <stdio.h>
+
+int main() {
+    int A[10][10], B[10][10], C[10][10];
+    int r1, c1, r2, c2, i, j, k;
+    
+    printf("Enter rows and columns for Matrix A: ");
+    scanf("%d %d", &r1, &c1);
+    printf("Enter rows and columns for Matrix B: ");
+    scanf("%d %d", &r2, &c2);
+    
+    if (c1 != r2) {
+        printf("\\nError: Columns of A (%d) must equal Rows of B (%d)!\\n", c1, r2);
+        return 1;
+    }
+    
+    printf("\\nEnter elements of Matrix A (%dx%d):\\n", r1, c1);
+    for(i = 0; i < r1; i++)
+        for(j = 0; j < c1; j++)
+            scanf("%d", &A[i][j]);
+    
+    printf("Enter elements of Matrix B (%dx%d):\\n", r2, c2);
+    for(i = 0; i < r2; i++)
+        for(j = 0; j < c2; j++)
+            scanf("%d", &B[i][j]);
+    
+    for(i = 0; i < r1; i++) {
+        for(j = 0; j < c2; j++) {
+            C[i][j] = 0;
+            for(k = 0; k < c1; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+    
+    printf("\\n--- RESULTANT MATRIX (A x B) ---\\n");
+    for(i = 0; i < r1; i++) {
+        for(j = 0; j < c2; j++) {
+            printf("%d\\t", C[i][j]);
+        }
+        printf("\\n");
+    }
+    
+    return 0;
+}`
+        };
+
+        // Exercise 5: String Operations (4 programs) - Files 25-28
+        const exercise5Programs = {
+            program1: `#include <stdio.h>
+
+int main() {
+    char str[100];
+    int i = 0, length = 0;
+    
+    printf("Enter a string: ");
+    scanf("%99[^\\n]", str);
+    
+    while (str[i] != '\\0') {
+        length++;
+        i++;
+    }
+    
+    printf("Length of the string = %d\\n", length);
+    
+    return 0;
+}`,
+            program2: `#include <stdio.h>
+
+int main() {
+    char str1[100], str2[100];
+    int i = 0, result = 0;
+    
+    printf("Enter first string: ");
+    scanf("%99[^\\n]", str1);
+    getchar();
+    printf("Enter second string: ");
+    scanf("%99[^\\n]", str2);
+    
+    while (str1[i] != '\\0' && str2[i] != '\\0') {
+        if (str1[i] != str2[i]) {
+            result = str1[i] - str2[i];
+            break;
+        }
+        i++;
+    }
+    
+    if (result == 0)
+        result = str1[i] - str2[i];
+    
+    if (result == 0)
+        printf("Both strings are equal.\\n");
+    else if (result < 0)
+        printf("First string is smaller than second string.\\n");
+    else
+        printf("First string is greater than second string.\\n");
+    
+    return 0;
+}`,
+            program3: `#include <stdio.h>
+
+int main() {
+    char str1[200], str2[100];
+    int i = 0, j = 0;
+    
+    printf("Enter first string: ");
+    scanf("%99[^\\n]", str1);
+    getchar();
+    printf("Enter second string: ");
+    scanf("%99[^\\n]", str2);
+    
+    while (str1[i] != '\\0')
+        i++;
+    
+    while (str2[j] != '\\0') {
+        str1[i] = str2[j];
+        i++;
+        j++;
+    }
+    
+    str1[i] = '\\0';
+    
+    printf("Concatenated string = %s\\n", str1);
+    
+    return 0;
+}`,
+            program4: `#include <stdio.h>
+
+int main() {
+    char source[100], destination[100];
+    int i = 0;
+    
+    printf("Enter a string: ");
+    scanf("%99[^\\n]", source);
+    
+    while (source[i] != '\\0') {
+        destination[i] = source[i];
+        i++;
+    }
+    
+    destination[i] = '\\0';
+    
+    printf("Copied string = %s\\n", destination);
+    
+    return 0;
+}`
+        };
+
+        function sanitizeFilename(name) {
+            name = name.trim();
+            name = name.replace(/[^a-zA-Z0-9_-]/g, '');
+            // Turbo C++ limit: 8 characters before .c
+            // We need 2 chars for file number, so max 6 chars for name
+            if (name.length > 6) {
+                name = name.substring(0, 6);
+            }
+            return name;
+        }
+
+        function showMessage(msgId, text, type) {
+            const msgElement = document.getElementById(msgId);
+            msgElement.textContent = text;
+            msgElement.className = `message ${type}`;
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    msgElement.className = 'message';
+                }, 5000);
+            }
+        }
+
+        function updatePreview() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value.trim();
+
+            if (!name) {
+                document.getElementById('previewSection1').classList.remove('active');
+                document.getElementById('previewSection2').classList.remove('active');
+                document.getElementById('previewSection3').classList.remove('active');
+                document.getElementById('previewSection4').classList.remove('active');
+                document.getElementById('previewSection5').classList.remove('active');
+                return;
+            }
+
+            const sanitized = sanitizeFilename(name);
+            if (!sanitized) {
+                document.getElementById('previewSection1').classList.remove('active');
+                document.getElementById('previewSection2').classList.remove('active');
+                document.getElementById('previewSection3').classList.remove('active');
+                document.getElementById('previewSection4').classList.remove('active');
+                document.getElementById('previewSection5').classList.remove('active');
+                return;
+            }
+
+            // Update Exercise 1 preview (files 01-07)
+            const fileList1 = document.getElementById('fileList1');
+            let html1 = '';
+            for (let i = 1; i <= 7; i++) {
+                const num = String(i).padStart(2, '0');
+                html1 += `<li>${sanitized}${num}.c</li>`;
+            }
+            fileList1.innerHTML = html1;
+            document.getElementById('previewSection1').classList.add('active');
+
+            // Update Exercise 2 preview (files 08-14)
+            const fileList2 = document.getElementById('fileList2');
+            let html2 = '';
+            for (let i = 8; i <= 14; i++) {
+                const num = String(i).padStart(2, '0');
+                html2 += `<li>${sanitized}${num}.c</li>`;
+            }
+            fileList2.innerHTML = html2;
+            document.getElementById('previewSection2').classList.add('active');
+
+            // Update Exercise 3 preview (files 15-22)
+            const fileList3 = document.getElementById('fileList3');
+            let html3 = '';
+            for (let i = 15; i <= 22; i++) {
+                const num = String(i).padStart(2, '0');
+                html3 += `<li>${sanitized}${num}.c</li>`;
+            }
+            fileList3.innerHTML = html3;
+            document.getElementById('previewSection3').classList.add('active');
+
+            // Update Exercise 4 preview (files 23-24)
+            const fileList4 = document.getElementById('fileList4');
+            let html4 = '';
+            for (let i = 23; i <= 24; i++) {
+                const num = String(i).padStart(2, '0');
+                html4 += `<li>${sanitized}${num}.c</li>`;
+            }
+            fileList4.innerHTML = html4;
+            document.getElementById('previewSection4').classList.add('active');
+
+            // Update Exercise 5 preview (files 25-28)
+            const fileList5 = document.getElementById('fileList5');
+            let html5 = '';
+            for (let i = 25; i <= 28; i++) {
+                const num = String(i).padStart(2, '0');
+                html5 += `<li>${sanitized}${num}.c</li>`;
+            }
+            fileList5.innerHTML = html5;
+            document.getElementById('previewSection5').classList.add('active');
+        }
+
+        function downloadFile(content, filename) {
+            return new Promise((resolve) => {
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                setTimeout(() => {
+                    URL.revokeObjectURL(url);
+                    resolve();
+                }, 100);
+            });
+        }
+
+        async function generateExercise1() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value;
+
+            if (!name.trim()) {
+                showMessage('message1', 'Please enter your name.', 'error');
+                return;
+            }
+
+            const sanitized = sanitizeFilename(name);
+            if (!sanitized) {
+                showMessage('message1', 'Please enter a valid name.', 'error');
+                return;
+            }
+
+            // Files 01-07
+            for (let i = 1; i <= 7; i++) {
+                const num = String(i).padStart(2, '0');
+                const key = `program${i}`;
+                await downloadFile(exercise1Programs[key], `${sanitized}${num}.c`);
+            }
+
+            let message = 'Exercise 1: 7 C files generated successfully!\n\n';
+            for (let i = 1; i <= 7; i++) {
+                const num = String(i).padStart(2, '0');
+                message += `${sanitized}${num}.c\n`;
+            }
+            showMessage('message1', message, 'success');
+        }
+
+        async function generateExercise2() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value;
+
+            if (!name.trim()) {
+                showMessage('message2', 'Please enter your name.', 'error');
+                return;
+            }
+
+            const sanitized = sanitizeFilename(name);
+            if (!sanitized) {
+                showMessage('message2', 'Please enter a valid name.', 'error');
+                return;
+            }
+
+            // Files 08-14
+            for (let i = 1; i <= 7; i++) {
+                const fileNum = i + 7;
+                const num = String(fileNum).padStart(2, '0');
+                const key = `program${i}`;
+                await downloadFile(exercise2Programs[key], `${sanitized}${num}.c`);
+            }
+
+            let message = 'Exercise 2: 7 C files generated successfully!\n\n';
+            for (let i = 8; i <= 14; i++) {
+                const num = String(i).padStart(2, '0');
+                message += `${sanitized}${num}.c\n`;
+            }
+            showMessage('message2', message, 'success');
+        }
+
+        async function generateExercise3() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value;
+
+            if (!name.trim()) {
+                showMessage('message3', 'Please enter your name.', 'error');
+                return;
+            }
+
+            const sanitized = sanitizeFilename(name);
+            if (!sanitized) {
+                showMessage('message3', 'Please enter a valid name.', 'error');
+                return;
+            }
+
+            // Files 15-22
+            for (let i = 1; i <= 8; i++) {
+                const fileNum = i + 14;
+                const num = String(fileNum).padStart(2, '0');
+                const key = `program${i}`;
+                await downloadFile(exercise3Programs[key], `${sanitized}${num}.c`);
+            }
+
+            let message = 'Exercise 3: 8 C files generated successfully!\n\n';
+            for (let i = 15; i <= 22; i++) {
+                const num = String(i).padStart(2, '0');
+                message += `${sanitized}${num}.c\n`;
+            }
+            showMessage('message3', message, 'success');
+        }
+
+        async function generateExercise4() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value;
+
+            if (!name.trim()) {
+                showMessage('message4', 'Please enter your name.', 'error');
+                return;
+            }
+
+            const sanitized = sanitizeFilename(name);
+            if (!sanitized) {
+                showMessage('message4', 'Please enter a valid name.', 'error');
+                return;
+            }
+
+            // Files 23-24
+            for (let i = 1; i <= 2; i++) {
+                const fileNum = i + 22;
+                const num = String(fileNum).padStart(2, '0');
+                const key = `program${i}`;
+                await downloadFile(exercise4Programs[key], `${sanitized}${num}.c`);
+            }
+
+            let message = 'Exercise 4: 2 C files generated successfully!\n\n';
+            for (let i = 23; i <= 24; i++) {
+                const num = String(i).padStart(2, '0');
+                message += `${sanitized}${num}.c\n`;
+            }
+            showMessage('message4', message, 'success');
+        }
+
+        async function generateExercise5() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value;
+
+            if (!name.trim()) {
+                showMessage('message5', 'Please enter your name.', 'error');
+                return;
+            }
+
+            const sanitized = sanitizeFilename(name);
+            if (!sanitized) {
+                showMessage('message5', 'Please enter a valid name.', 'error');
+                return;
+            }
+
+            // Files 25-28
+            for (let i = 1; i <= 4; i++) {
+                const fileNum = i + 24;
+                const num = String(fileNum).padStart(2, '0');
+                const key = `program${i}`;
+                await downloadFile(exercise5Programs[key], `${sanitized}${num}.c`);
+            }
+
+            let message = 'Exercise 5: 4 C files generated successfully!\n\n';
+            for (let i = 25; i <= 28; i++) {
+                const num = String(i).padStart(2, '0');
+                message += `${sanitized}${num}.c\n`;
+            }
+            showMessage('message5', message, 'success');
+        }
+
+        function goToCodeStore() {
+            window.location.href = 'Codestore.html';
+        }
+
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateExercise1();
+            }
+        });
+
+        updatePreview();
+    </script>
+</body>
+</html>
+   
