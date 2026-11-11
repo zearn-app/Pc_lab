@@ -692,4 +692,126 @@ int main()
             for (let i = 0; i < ex.programs.length; i++) {
                 await downloadFile(ex.programs[i].code, files[i]);
             }
-            showMessage(msgId, `Exercise ${ex.id}: ${files.length} C files generated successfully!\n\n${files.join('\n')}`, 'success
+            showMessage(msgId, `Exercise ${ex.id}: ${files.length} C files generated successfully!\n\n${files.join('\n')}`, 'success');
+        }
+
+        async function generateAimFile(exIndex) {
+            const ex = exercises[exIndex];
+            const msgId = `msg-${ex.id}`;
+            const s = checkName(msgId);
+            if (!s) return;
+            const file = aimFileName(ex, s);
+            await downloadFile(buildAim(ex), file);
+            showMessage(msgId, `Exercise ${ex.id} aim file generated successfully!\n\n${file}`, 'success');
+        }
+
+        // ===== Page rendering =====
+        function renderExercises() {
+            const container = document.getElementById('exercises');
+            const codes = document.getElementById('codes');
+
+            exercises.forEach((ex, exIndex) => {
+                const section = document.createElement('div');
+                section.className = 'exercise-section';
+
+                const title = document.createElement('div');
+                title.className = 'exercise-title';
+                title.textContent = `${ex.title} (Files ${ex.start}-${ex.start + ex.programs.length - 1})`;
+                section.appendChild(title);
+
+                const buttons = document.createElement('div');
+                buttons.className = 'button-group';
+
+                const codeBtn = document.createElement('button');
+                codeBtn.className = 'generate-btn';
+                codeBtn.textContent = `Generate Code Files (${ex.programs.length})`;
+                codeBtn.addEventListener('click', () => generateCodeFiles(exIndex));
+                buttons.appendChild(codeBtn);
+
+                const aimBtn = document.createElement('button');
+                aimBtn.className = 'aim-btn';
+                aimBtn.textContent = 'Generate Aim File';
+                aimBtn.addEventListener('click', () => generateAimFile(exIndex));
+                buttons.appendChild(aimBtn);
+
+                section.appendChild(buttons);
+
+                const msg = document.createElement('div');
+                msg.className = 'message';
+                msg.id = `msg-${ex.id}`;
+                section.appendChild(msg);
+
+                const preview = document.createElement('div');
+                preview.className = 'preview-section';
+                preview.id = `prev-${ex.id}`;
+                const pTitle = document.createElement('div');
+                pTitle.className = 'preview-title';
+                pTitle.textContent = 'Files to be generated';
+                const pBox = document.createElement('div');
+                pBox.className = 'preview-files';
+                const list = document.createElement('ul');
+                list.className = 'file-list';
+                list.id = `list-${ex.id}`;
+                pBox.appendChild(list);
+                preview.appendChild(pTitle);
+                preview.appendChild(pBox);
+                section.appendChild(preview);
+
+                container.appendChild(section);
+
+                const exHeader = document.createElement('div');
+                exHeader.className = 'exercise-title';
+                exHeader.style.marginTop = '30px';
+                exHeader.textContent = ex.title;
+                codes.appendChild(exHeader);
+
+                ex.programs.forEach((p, idx) => {
+                    const h = document.createElement('div');
+                    h.className = 'program-title';
+                    h.textContent = `${pad(ex.start + idx)}. ${p.title}`;
+                    codes.appendChild(h);
+
+                    const a = document.createElement('div');
+                    a.className = 'program-aim';
+                    a.textContent = p.aim;
+                    codes.appendChild(a);
+
+                    const pre = document.createElement('pre');
+                    pre.className = 'code-block';
+                    const code = document.createElement('code');
+                    code.textContent = p.code;
+                    pre.appendChild(code);
+                    codes.appendChild(pre);
+                });
+            });
+        }
+
+        function updatePreview() {
+            const s = getName();
+            exercises.forEach((ex) => {
+                const previewEl = document.getElementById(`prev-${ex.id}`);
+                const list = document.getElementById(`list-${ex.id}`);
+                if (!s) {
+                    previewEl.classList.remove('active');
+                    return;
+                }
+                const items = [...codeFileNames(ex, s), aimFileName(ex, s)];
+                list.innerHTML = '';
+                items.forEach((name) => {
+                    const li = document.createElement('li');
+                    li.textContent = name;
+                    list.appendChild(li);
+                });
+                previewEl.classList.add('active');
+            });
+        }
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        renderExercises();
+        updatePreview();
+    </script>
+</body>
+</html>
