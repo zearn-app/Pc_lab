@@ -365,7 +365,7 @@
 
         <div class="header">
             <button class="back-btn" onclick="goBack()">← Back to Generator</button>
-            <div class="title">Exercise 9</div>
+            <div class="title">Exercises 9-10</div>
         </div>
 
         <div class="card">
@@ -591,6 +591,98 @@ int main()
                     }
                 ]
             }
+            ,
+            {
+                id: 10,
+                start: 46,
+                title: 'Exercise 10: Structure and Union',
+                aim: 'To understand user-defined data types in C: a structure groups different data types with separate memory for each member, while a union shares one memory location among all its members.',
+                programs: [
+                    {
+                        title: 'Structure in C',
+                        aim: 'To write a C program using a structure to read and display a student\'s roll number, name and marks.',
+                        algorithm: [
+                            'Start the program.',
+                            'Define a structure named Student with roll number, name and marks as members.',
+                            'Declare a structure variable.',
+                            'Read the student\'s roll number, name and marks.',
+                            'Display the values stored in the structure members.',
+                            'Stop the program.'
+                        ],
+                        output: 'Enter roll number: 101\nEnter name: Anitha\nEnter marks: 89.5\n\nStudent Details\nRoll Number : 101\nName        : Anitha\nMarks       : 89.50',
+                        code: String.raw`#include <stdio.h>
+
+struct Student
+{
+    int rollNo;
+    char name[50];
+    float marks;
+};
+
+int main()
+{
+    struct Student s;
+
+    printf("Enter roll number: ");
+    scanf("%d", &s.rollNo);
+
+    printf("Enter name: ");
+    scanf(" %49[^\n]", s.name);
+
+    printf("Enter marks: ");
+    scanf("%f", &s.marks);
+
+    printf("\nStudent Details\n");
+    printf("Roll Number : %d\n", s.rollNo);
+    printf("Name        : %s\n", s.name);
+    printf("Marks       : %.2f\n", s.marks);
+
+    return 0;
+}`
+                    },
+                    {
+                        title: 'Union in C',
+                        aim: 'To write a C program using a union to store and display an employee\'s ID, salary or grade, one member at a time.',
+                        algorithm: [
+                            'Start the program.',
+                            'Define a union named EmployeeData with integer ID, float salary and character grade as members.',
+                            'Declare a union variable.',
+                            'Read and display the employee ID.',
+                            'Read and display the salary. This overwrites the value previously stored in the shared memory.',
+                            'Read and display the grade. This overwrites the salary value.',
+                            'Stop the program.'
+                        ],
+                        output: 'Enter employee ID: 205\nEmployee ID: 205\n\nEnter salary: 35000\nSalary: 35000.00\n\nEnter grade: A\nGrade: A',
+                        code: String.raw`#include <stdio.h>
+
+union EmployeeData
+{
+    int id;
+    float salary;
+    char grade;
+};
+
+int main()
+{
+    union EmployeeData emp;
+
+    printf("Enter employee ID: ");
+    scanf("%d", &emp.id);
+    printf("Employee ID: %d\n", emp.id);
+
+    printf("\nEnter salary: ");
+    scanf("%f", &emp.salary);
+    printf("Salary: %.2f\n", emp.salary);
+
+    printf("\nEnter grade: ");
+    scanf(" %c", &emp.grade);
+    printf("Grade: %c\n", emp.grade);
+
+    return 0;
+}`
+                    }
+                ]
+            }
         ];
 
         // ===== Helpers =====
@@ -608,210 +700,4 @@ int main()
             return String(n).padStart(2, '0');
         }
 
-        function getName() {
-            return sanitizeFilename(document.getElementById('nameInput').value);
-        }
-
-        function showMessage(id, text, type) {
-            const el = document.getElementById(id);
-            el.textContent = text;
-            el.className = `message ${type}`;
-            if (type === 'success') {
-                setTimeout(() => { el.className = 'message'; }, 6000);
-            }
-        }
-
-        function downloadFile(content, filename) {
-            return new Promise((resolve) => {
-                const blob = new Blob([content], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                setTimeout(() => {
-                    URL.revokeObjectURL(url);
-                    resolve();
-                }, 100);
-            });
-        }
-
-        function aimFileName(ex, s) {
-            return `${s}A${ex.id}.c`;
-        }
-
-        function codeFileNames(ex, s) {
-            return ex.programs.map((p, idx) => `${s}${pad(ex.start + idx)}.c`);
-        }
-
-        function buildAim(ex) {
-            let out = '/*\n';
-            out += '==================================================\n';
-            out += `${ex.title.toUpperCase()}\n`;
-            out += 'AIM AND PROCEDURES\n';
-            out += '==================================================\n\n';
-            out += 'AIM OF THE EXERCISE:\n';
-            out += `${ex.aim}\n`;
-            ex.programs.forEach((p, idx) => {
-                out += '\n--------------------------------------------------\n';
-                out += `PROGRAM ${idx + 1} (File ${pad(ex.start + idx)}): ${p.title}\n`;
-                out += '--------------------------------------------------\n';
-                out += `AIM:\n    ${p.aim}\n\n`;
-                out += 'ALGORITHM:\n';
-                p.algorithm.forEach((step, n) => {
-                    out += `    ${n + 1}. ${step}\n`;
-                });
-                out += `\nSAMPLE OUTPUT:\n${p.output.split('\n').map(l => '    ' + l).join('\n')}\n`;
-            });
-            out += '\n*/\n';
-            return out;
-        }
-
-        // ===== Generators =====
-        function checkName(msgId) {
-            if (!document.getElementById('nameInput').value.trim()) {
-                showMessage(msgId, 'Please enter your name.', 'error');
-                return null;
-            }
-            const s = getName();
-            if (!s) {
-                showMessage(msgId, 'Please enter a valid name.', 'error');
-                return null;
-            }
-            return s;
-        }
-
-        async function generateCodeFiles(exIndex) {
-            const ex = exercises[exIndex];
-            const msgId = `msg-${ex.id}`;
-            const s = checkName(msgId);
-            if (!s) return;
-            const files = codeFileNames(ex, s);
-            for (let i = 0; i < ex.programs.length; i++) {
-                await downloadFile(ex.programs[i].code, files[i]);
-            }
-            showMessage(msgId, `Exercise ${ex.id}: ${files.length} C files generated successfully!\n\n${files.join('\n')}`, 'success');
-        }
-
-        async function generateAimFile(exIndex) {
-            const ex = exercises[exIndex];
-            const msgId = `msg-${ex.id}`;
-            const s = checkName(msgId);
-            if (!s) return;
-            const file = aimFileName(ex, s);
-            await downloadFile(buildAim(ex), file);
-            showMessage(msgId, `Exercise ${ex.id} aim file generated successfully!\n\n${file}`, 'success');
-        }
-
-        // ===== Page rendering =====
-        function renderExercises() {
-            const container = document.getElementById('exercises');
-            const codes = document.getElementById('codes');
-
-            exercises.forEach((ex, exIndex) => {
-                const section = document.createElement('div');
-                section.className = 'exercise-section';
-
-                const title = document.createElement('div');
-                title.className = 'exercise-title';
-                title.textContent = `${ex.title} (Files ${ex.start}-${ex.start + ex.programs.length - 1})`;
-                section.appendChild(title);
-
-                const buttons = document.createElement('div');
-                buttons.className = 'button-group';
-
-                const codeBtn = document.createElement('button');
-                codeBtn.className = 'generate-btn';
-                codeBtn.textContent = `Generate Code Files (${ex.programs.length})`;
-                codeBtn.addEventListener('click', () => generateCodeFiles(exIndex));
-                buttons.appendChild(codeBtn);
-
-                const aimBtn = document.createElement('button');
-                aimBtn.className = 'aim-btn';
-                aimBtn.textContent = 'Generate Aim File';
-                aimBtn.addEventListener('click', () => generateAimFile(exIndex));
-                buttons.appendChild(aimBtn);
-
-                section.appendChild(buttons);
-
-                const msg = document.createElement('div');
-                msg.className = 'message';
-                msg.id = `msg-${ex.id}`;
-                section.appendChild(msg);
-
-                const preview = document.createElement('div');
-                preview.className = 'preview-section';
-                preview.id = `prev-${ex.id}`;
-                const pTitle = document.createElement('div');
-                pTitle.className = 'preview-title';
-                pTitle.textContent = 'Files to be generated';
-                const pBox = document.createElement('div');
-                pBox.className = 'preview-files';
-                const list = document.createElement('ul');
-                list.className = 'file-list';
-                list.id = `list-${ex.id}`;
-                pBox.appendChild(list);
-                preview.appendChild(pTitle);
-                preview.appendChild(pBox);
-                section.appendChild(preview);
-
-                container.appendChild(section);
-
-                const exHeader = document.createElement('div');
-                exHeader.className = 'exercise-title';
-                exHeader.style.marginTop = '30px';
-                exHeader.textContent = ex.title;
-                codes.appendChild(exHeader);
-
-                ex.programs.forEach((p, idx) => {
-                    const h = document.createElement('div');
-                    h.className = 'program-title';
-                    h.textContent = `${pad(ex.start + idx)}. ${p.title}`;
-                    codes.appendChild(h);
-
-                    const a = document.createElement('div');
-                    a.className = 'program-aim';
-                    a.textContent = p.aim;
-                    codes.appendChild(a);
-
-                    const pre = document.createElement('pre');
-                    pre.className = 'code-block';
-                    const code = document.createElement('code');
-                    code.textContent = p.code;
-                    pre.appendChild(code);
-                    codes.appendChild(pre);
-                });
-            });
-        }
-
-        function updatePreview() {
-            const s = getName();
-            exercises.forEach((ex) => {
-                const previewEl = document.getElementById(`prev-${ex.id}`);
-                const list = document.getElementById(`list-${ex.id}`);
-                if (!s) {
-                    previewEl.classList.remove('active');
-                    return;
-                }
-                const items = [...codeFileNames(ex, s), aimFileName(ex, s)];
-                list.innerHTML = '';
-                items.forEach((name) => {
-                    const li = document.createElement('li');
-                    li.textContent = name;
-                    list.appendChild(li);
-                });
-                previewEl.classList.add('active');
-            });
-        }
-
-        function goBack() {
-            window.location.href = 'index.html';
-        }
-
-        renderExercises();
-        updatePreview();
-    </script>
-</body>
-</html>
+        f
