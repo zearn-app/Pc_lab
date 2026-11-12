@@ -700,4 +700,213 @@ int main()
             return String(n).padStart(2, '0');
         }
 
-        f
+        function getName() {
+            return sanitizeFilename(document.getElementById('nameInput').value);
+        }
+
+        function showMessage(id, text, type) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            el.className = `message ${type}`;
+            if (type === 'success') {
+                setTimeout(() => { el.className = 'message'; }, 6000);
+            }
+        }
+
+        function downloadFile(content, filename) {
+            return new Promise((resolve) => {
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => {
+                    URL.revokeObjectURL(url);
+                    resolve();
+                }, 100);
+            });
+        }
+
+        function aimFileName(ex, s) {
+            // Turbo C++ 8.3 limit: prefix "A<id>" plus name must fit in 8 chars
+            const prefix = `A${ex.id}`;
+            const base = s.substring(0, 8 - prefix.length);
+            return `${base}${prefix}.c`;
+        }
+
+        function codeFileNames(ex, s) {
+            return ex.programs.map((p, idx) => `${s}${pad(ex.start + idx)}.c`);
+        }
+
+        function buildAim(ex) {
+            let out = '/*\n';
+            out += '==================================================\n';
+            out += `${ex.title.toUpperCase()}\n`;
+            out += 'AIM AND PROCEDURES\n';
+            out += '==================================================\n\n';
+            out += 'AIM OF THE EXERCISE:\n';
+            out += `${ex.aim}\n`;
+            ex.programs.forEach((p, idx) => {
+                out += '\n--------------------------------------------------\n';
+                out += `PROGRAM ${idx + 1} (File ${pad(ex.start + idx)}): ${p.title}\n`;
+                out += '--------------------------------------------------\n';
+                out += `AIM:\n    ${p.aim}\n\n`;
+                out += 'ALGORITHM:\n';
+                p.algorithm.forEach((step, n) => {
+                    out += `    ${n + 1}. ${step}\n`;
+                });
+                out += `\nSAMPLE OUTPUT:\n${p.output.split('\n').map(l => '    ' + l).join('\n')}\n`;
+            });
+            out += '\n*/\n';
+            return out;
+        }
+
+        // ===== Generators =====
+        function checkName(msgId) {
+            if (!document.getElementById('nameInput').value.trim()) {
+                showMessage(msgId, 'Please enter your name.', 'error');
+                return null;
+            }
+            const s = getName();
+            if (!s) {
+                showMessage(msgId, 'Please enter a valid name.', 'error');
+                return null;
+            }
+            return s;
+        }
+
+        async function generateCodeFiles(exIndex) {
+            const ex = exercises[exIndex];
+            const msgId = `msg-${ex.id}`;
+            const s = checkName(msgId);
+            if (!s) return;
+            const files = codeFileNames(ex, s);
+            for (let i = 0; i < ex.programs.length; i++) {
+                await downloadFile(ex.programs[i].code, files[i]);
+            }
+            showMessage(msgId, `Exercise ${ex.id}: ${files.length} C files generated successfully!\n\n${files.join('\n')}`, 'success');
+        }
+
+        async function generateAimFile(exIndex) {
+            const ex = exercises[exIndex];
+            const msgId = `msg-${ex.id}`;
+            const s = checkName(msgId);
+            if (!s) return;
+            const file = aimFileName(ex, s);
+            await downloadFile(buildAim(ex), file);
+            showMessage(msgId, `Exercise ${ex.id} aim file generated successfully!\n\n${file}`, 'success');
+        }
+
+        // ===== Page rendering =====
+        function renderExercises() {
+            const container = document.getElementById('exercises');
+            const codes = document.getElementById('codes');
+
+            exercises.forEach((ex, exIndex) => {
+                const section = document.createElement('div');
+                section.className = 'exercise-section';
+
+                const title = document.createElement('div');
+                title.className = 'exercise-title';
+                title.textContent = `${ex.title} (Files ${ex.start}-${ex.start + ex.programs.length - 1})`;
+                section.appendChild(title);
+
+                const buttons = document.createElement('div');
+                buttons.className = 'button-group';
+
+                const codeBtn = document.createElement('button');
+                codeBtn.className = 'generate-btn';
+                codeBtn.textContent = `Generate Code Files (${ex.programs.length})`;
+                codeBtn.addEventListener('click', () => generateCodeFiles(exIndex));
+                buttons.appendChild(codeBtn);
+
+                const aimBtn = document.createElement('button');
+                aimBtn.className = 'aim-btn';
+                aimBtn.textContent = 'Generate Aim File';
+                aimBtn.addEventListener('click', () => generateAimFile(exIndex));
+                buttons.appendChild(aimBtn);
+
+                section.appendChild(buttons);
+
+                const msg = document.createElement('div');
+                msg.className = 'message';
+                msg.id = `msg-${ex.id}`;
+                section.appendChild(msg);
+
+                const preview = document.createElement('div');
+                preview.className = 'preview-section';
+                preview.id = `prev-${ex.id}`;
+                const pTitle = document.createElement('div');
+                pTitle.className = 'preview-title';
+                pTitle.textContent = 'Files to be generated';
+                const pBox = document.createElement('div');
+                pBox.className = 'preview-files';
+                const list = document.createElement('ul');
+                list.className = 'file-list';
+                list.id = `list-${ex.id}`;
+                pBox.appendChild(list);
+                preview.appendChild(pTitle);
+                preview.appendChild(pBox);
+                section.appendChild(preview);
+
+                container.appendChild(section);
+
+                const exHeader = document.createElement('div');
+                exHeader.className = 'exercise-title';
+                exHeader.style.marginTop = '30px';
+                exHeader.textContent = ex.title;
+                codes.appendChild(exHeader);
+
+                ex.programs.forEach((p, idx) => {
+                    const h = document.createElement('div');
+                    h.className = 'program-title';
+                    h.textContent = `${pad(ex.start + idx)}. ${p.title}`;
+                    codes.appendChild(h);
+
+                    const a = document.createElement('div');
+                    a.className = 'program-aim';
+                    a.textContent = p.aim;
+                    codes.appendChild(a);
+
+                    const pre = document.createElement('pre');
+                    pre.className = 'code-block';
+                    const code = document.createElement('code');
+                    code.textContent = p.code;
+                    pre.appendChild(code);
+                    codes.appendChild(pre);
+                });
+            });
+        }
+
+        function updatePreview() {
+            const s = getName();
+            exercises.forEach((ex) => {
+                const previewEl = document.getElementById(`prev-${ex.id}`);
+                const list = document.getElementById(`list-${ex.id}`);
+                if (!s) {
+                    previewEl.classList.remove('active');
+                    return;
+                }
+                const items = [...codeFileNames(ex, s), aimFileName(ex, s)];
+                list.innerHTML = '';
+                items.forEach((name) => {
+                    const li = document.createElement('li');
+                    li.textContent = name;
+                    list.appendChild(li);
+                });
+                previewEl.classList.add('active');
+            });
+        }
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        renderExercises();
+        updatePreview();
+    </script>
+</body>
+</html>
